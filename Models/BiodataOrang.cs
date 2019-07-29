@@ -17,7 +17,9 @@ namespace Ormawa.Models
         public byte? AnakKe { get; set; }
         public byte? DariJumlahBersaudara { get; set; }
         public string PertamaMerokok { get; set; }
+        public int? PengubahId { get; set; }
+        public int? AsalNegaraId { get; set; }
 
-        public Orang IdNavigation { get; set; }
+        public virtual Orang IdNavigation { get; set; }
     }
 }

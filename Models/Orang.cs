@@ -5,6 +5,13 @@ namespace Ormawa.Models
 {
     public partial class Orang
     {
+        public Orang()
+        {
+            Mahasiswa = new HashSet<Mahasiswa>();
+            PengajuanProposalKegiatanApprovedByNavigation = new HashSet<PengajuanProposalKegiatan>();
+            PengajuanProposalKegiatanPenanggungJawab = new HashSet<PengajuanProposalKegiatan>();
+        }
+
         public int Id { get; set; }
         public string Nama { get; set; }
         public string TempatLahir { get; set; }
@@ -22,7 +29,11 @@ namespace Ormawa.Models
         public string OrangTuaVkey { get; set; }
         public string Nims0key { get; set; }
         public string Nimppdhkey { get; set; }
+        public int? OrangTamuKey { get; set; }
 
-        public BiodataOrang BiodataOrang { get; set; }
+        public virtual BiodataOrang BiodataOrang { get; set; }
+        public virtual ICollection<Mahasiswa> Mahasiswa { get; set; }
+        public virtual ICollection<PengajuanProposalKegiatan> PengajuanProposalKegiatanApprovedByNavigation { get; set; }
+        public virtual ICollection<PengajuanProposalKegiatan> PengajuanProposalKegiatanPenanggungJawab { get; set; }
     }
 }

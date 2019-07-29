@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ormawa.Models;
-
+using Ormawa.Services;
 
 namespace Ormawa
 {
@@ -39,7 +39,8 @@ namespace Ormawa
             services.AddMvcJQueryDataTables();
 
             //services.AddTransient<Combobox>();
-            
+            services.AddTransient<IFileService, FileService>();
+
             var connectionString = Configuration.GetSection("ConnectionStrings");
             services.AddDbContext<DBINTEGRASI_MASTER_BAYUPPKU2Context>(options => options.UseSqlServer(connectionString["DefaultConnection"]).UseLoggerFactory(DbLoggerFactory));
         }

@@ -1,10 +1,10 @@
-﻿<h1>Home Page</h1>
+﻿@model Ormawa.ViewModel.UploadViewModel
+<h1>Home Page</h1>
 
 <div>
     <h4>Multiple File Upload</h4>
-    <form asp-controller="Upload" asp-action="MultipleFiles"
-          enctype="multipart/form-data" method="post">
-        <input type="file" multiple name="files" />
+    <form asp-controller="Upload" asp-action="MultipleFiles" enctype="multipart/form-data" method="post">
+        <input asp-for ="FileDokumen" type="file" multiple name="files" />
         <button type="submit">Submit</button>
     </form>
 </div>

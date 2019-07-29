@@ -17,6 +17,7 @@ namespace Ormawa.BusinessModel
             _context = context;
         }
 
+        //Daftar Anggota
         public List<ComboboxViewModel> Mahasiswa()
         {
             var mhs = from m in _context.Mahasiswa
@@ -74,15 +75,28 @@ namespace Ormawa.BusinessModel
                                };
             return JenisKegiatan.ToList();
         }
-       /* public List<ComboboxViewModel> PenanggungJawabOrmawa()
+
+        //DaftarPrestasi
+        public List<ComboboxViewModel> JenisPrestasiOrmawa()
         {
-            var JenisKegiatan = from m in _context.Pen
+            var JenisPrestasi = from m in _context.JenisPrestasiOrmawa
                                 select new ComboboxViewModel
                                 {
                                     ID = m.Id.ToString(),
                                     Value = m.Nama
                                 };
-            return JenisKegiatan.ToList();
-        }*/
+            return JenisPrestasi.ToList();
+        }
+
+        /* public List<ComboboxViewModel> PenanggungJawabOrmawa()
+         {
+             var JenisKegiatan = from m in _context.Pen
+                                 select new ComboboxViewModel
+                                 {
+                                     ID = m.Id.ToString(),
+                                     Value = m.Nama
+                                 };
+             return JenisKegiatan.ToList();
+         }*/
     }
 }

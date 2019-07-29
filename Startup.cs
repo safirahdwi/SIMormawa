@@ -40,6 +40,7 @@ namespace Ormawa
             services.AddMvcJQueryDataTables();
 
             services.AddTransient<Combobox>();
+            services.AddTransient<OrganisasiOrmawaRepo>();
             services.AddTransient<IFileService, FileService>();
 
             var connectionString = Configuration.GetSection("ConnectionStrings");

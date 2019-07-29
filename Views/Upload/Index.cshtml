@@ -3,8 +3,9 @@
 
 <div>
     <h4>Multiple File Upload</h4>
-    <form asp-controller="Upload" asp-action="MultipleFiles" enctype="multipart/form-data" method="post">
-        <input asp-for ="FileDokumen" type="file" multiple name="files" />
+    <form role="form" enctype="multipart/form-data" method="post" asp-controller="Upload" asp-action="MultipleFiles">
+        <input asp-for="FileDokumen" type="file" />
+        <input asp-for="Nama"/>
         <button type="submit">Submit</button>
     </form>
 </div>

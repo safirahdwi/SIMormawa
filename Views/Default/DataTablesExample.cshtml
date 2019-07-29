@@ -1,4 +1,4 @@
-@model Mvc.JQuery.DataTables.DataTableConfigVm
+@model Ormawa.ViewModels.OrganisasiOrmawaVM;
 
 @{
     ViewBag.Title = "Data Tables Example";
@@ -39,9 +39,9 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     @{
-                        Model.TableClass = "table table-bordered table-striped";
+                        Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
                     }
-                    <partial name="DataTable" model="Model"/>
+                    <partial name="DataTable" model="Model.DataTableConfigVm"/>
                 </div>
                 <!-- /.box-body -->
             </div>

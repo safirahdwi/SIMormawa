@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using Mvc.JQuery.DataTables;
 using Ormawa.Models;
 using Ormawa.ViewModels;
+using Ormawa.BusinessModel;
 
 namespace Ormawa.Controllers
 {
     public class DefaultController : Controller
     {
         private readonly DBINTEGRASI_MASTER_BAYUPPKU2Context _db;
+        private readonly OrganisasiOrmawaRepo _repo;
 
-        public DefaultController(DBINTEGRASI_MASTER_BAYUPPKU2Context db)
+        public DefaultController(DBINTEGRASI_MASTER_BAYUPPKU2Context db, OrganisasiOrmawaRepo repo)
         {
             _db = db;
+            _repo = repo;
         }
 
         [Authorize]
@@ -26,35 +29,28 @@ namespace Ormawa.Controllers
         [Authorize]
         public IActionResult DataTablesExample()
         {
+            OrganisasiOrmawaVM vmod = new OrganisasiOrmawaVM();
             var dataProviderUrl = Url.Action("DataTablesExampleDataProvider");
-            var viewModel = DataTablesHelper.DataTableVm<DataTablesExampleRow>("dataTable", dataProviderUrl);
+            var viewModel = DataTablesHelper.DataTableVm<OrganisasiOrmawaRow>("dataTable", dataProviderUrl);
 
             viewModel.ShowFilterInput = true;
             viewModel.PageLength = 10;
-            
-            return View(viewModel);
+
+            vmod.DataTableConfigVm = viewModel;
+
+            return View(vmod);
         }
-        
+
         [Authorize]
-        public DataTablesResult<DataTablesExampleRow> DataTablesExampleDataProvider(DataTablesParam param)
+        public DataTablesResult<OrganisasiOrmawaRow> DataTablesExampleDataProvider(DataTablesParam param)
         {
-            var query = _db.Orang.Where(x => !string.IsNullOrWhiteSpace(x.Nama) && x.TanggalLahir != null && x.Nims1key.Contains("G6416")).OrderBy(x => x.Nama).Select(x => new DataTablesExampleRow
-            {
-                Id = x.Id,
-                Nama = x.Nama,
-                TempatLahir = x.TempatLahir,
-                TanggalLahir = x.TanggalLahir,
-                NIM = x.Nims1key
-                
-            }).Take(100);
+            var query = _repo.GetOrganisasiList();
 
             var no = param.iDisplayStart + 1;
 
             return DataTablesResult.Create(query, param, row => new
             {
                 // custom formatting
-                No = no++,
-                TanggalLahir = row.TanggalLahir.ToString("D"),
                 Aksi = $"<input type=\"button\" class=\"btn btn-default\" value=\"Aksi\" onclick=\"alert('Orang ID: {row.Id}')\">"
             });
         }

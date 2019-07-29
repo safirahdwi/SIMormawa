@@ -14,7 +14,8 @@ namespace Ormawa.ViewModels
         
         [DataTables(SortDirection = SortDirection.Ascending)]
         public string Nama { get; set; }
-        
+        public string NIM { get; set; }
+
         public string TempatLahir { get; set; }
         
         [DataTables(Searchable = false)]

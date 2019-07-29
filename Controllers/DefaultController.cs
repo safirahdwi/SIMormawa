@@ -38,13 +38,15 @@ namespace Ormawa.Controllers
         [Authorize]
         public DataTablesResult<DataTablesExampleRow> DataTablesExampleDataProvider(DataTablesParam param)
         {
-            var query = _db.Orang.Where(x => !string.IsNullOrWhiteSpace(x.Nama) && x.TanggalLahir != null).OrderBy(x => x.Nama).Select(x => new DataTablesExampleRow
+            var query = _db.Orang.Where(x => !string.IsNullOrWhiteSpace(x.Nama) && x.TanggalLahir != null && x.Nims1key.Contains("G6416")).OrderBy(x => x.Nama).Select(x => new DataTablesExampleRow
             {
                 Id = x.Id,
                 Nama = x.Nama,
                 TempatLahir = x.TempatLahir,
                 TanggalLahir = x.TanggalLahir,
-            });
+                NIM = x.Nims1key
+                
+            }).Take(100);
 
             var no = param.iDisplayStart + 1;
 

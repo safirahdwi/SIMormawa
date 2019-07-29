@@ -10,9 +10,9 @@ namespace Ormawa.Controllers
 {
     public class DefaultController : Controller
     {
-        private readonly DBINTEGRASI_MASTERContext _db;
+        private readonly DBINTEGRASI_MASTER_BAYUPPKU2Context _db;
 
-        public DefaultController(DBINTEGRASI_MASTERContext db)
+        public DefaultController(DBINTEGRASI_MASTER_BAYUPPKU2Context db)
         {
             _db = db;
         }

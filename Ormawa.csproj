@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.172" />
     <PackageReference Include="Mvc.JQuery.DataTables.AspNetCore" Version="1.5.44" />
@@ -21,6 +21,7 @@
     <PackageReference Include="RestSharp" Version="106.6.5" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BusinessModel\" />
     <Folder Include="wwwroot\img" />
   </ItemGroup>
 </Project>

@@ -1,1 +1,0 @@
-dotnet ef dbcontext scaffold "Server=172.17.0.135;Database=DBINTEGRASI_MASTER;uid=sys-testing;pwd=Test2Test2ah;ConnectRetryCount=0" Microsoft.EntityFrameworkCore.SqlServer -o Models -f

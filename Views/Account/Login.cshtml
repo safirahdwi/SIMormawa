@@ -1,0 +1,43 @@
+@model Ormawa.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+
+    Layout = "_Layout";
+}
+
+<div class="card"></div>
+<div class="card">
+    <h1 class="title">Form Login</h1>
+
+
+    <partial name="_StatusMessage" />
+    <form asp-controller="Account" asp-action="Login" method="post" class="login glass">
+        <div class="input-container">
+            <input asp-for="Username" type="text" class="form-control" placeholder="Username">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <span asp-validation-for="Username" class="help-block"></span>
+        </div>
+        <div class="input-container">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <span asp-validation-for="Password" class="help-block"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+        <div class="input-container" style="height: 40px;">
+            <div class="checkbox icheck">
+                <label>
+                    <input asp-for="RememberMe" type="checkbox"> Tetap login
+                </label>
+            </div>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+        </div>
+        <br />
+        
+        <input type="hidden" asp-for="ReturnUrl" />
+    </form>
+
+</div>
+<!-- /.login-box-body -->

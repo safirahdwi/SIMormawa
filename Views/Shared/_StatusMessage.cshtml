@@ -1,0 +1,16 @@
+﻿@using Ormawa.Controllers
+
+@if (TempData["status"] != null && (int) TempData["status"] == AbstractBaseController.NotifStatusError)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <button class="close" aria-hidden="true" data-dismiss="alert" type="button">x</button>
+        @Html.Raw(TempData["message"])
+    </div>
+}
+@if (TempData["status"] != null && (int) TempData["status"] == AbstractBaseController.NotifStatusSuccess)
+{
+    <div class="alert alert-success alert-dismissable">
+        <button class="close" aria-hidden="true" data-dismiss="alert" type="button">x</button>
+        @Html.Raw(TempData["message"])
+    </div>
+}

@@ -1,0 +1,552 @@
+/* Write your CSS code. */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size:13px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+}
+
+.skin-blue-light .sidebar a {
+    color: #67757c;
+}
+
+.skin-blue-light .sidebar-menu > li > a{
+    font-weight:500;
+}
+ 
+
+.skin-blue .main-header .navbar, .skin-blue-light .main-header .navbar
+{
+    background: #1351ca;
+    background: -moz-linear-gradient(left,#1351ca 1%,#08318b 100%);
+    background: -webkit-linear-gradient(left,#1351ca 1%,#08318b 100%);
+    background: linear-gradient(to right,#1351ca 1%,#08318b 100%);
+}
+
+    .skin-blue .main-header .navbar .sidebar-toggle:hover, .skin-blue .main-header .logo:hover,
+    .skin-blue-light .main-header .navbar .sidebar-toggle:hover {
+        background: rgba(0,0,0,0.1);
+    }
+
+.skin-blue .main-header .logo, .skin-blue-light .main-header .logo, .skin-blue-light .main-header .logo:hover {
+    background-color: #124fc5;
+}
+
+.main-header {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
+}
+
+.skin-blue-light .wrapper, .skin-blue-light .main-sidebar, .skin-blue-light .left-side {
+    background-color: #fff;
+}
+
+.skin-blue-light .main-sidebar {
+    border-right: 0px;
+    -webkit-box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+    box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+}
+
+.box {
+    box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+    border-top: 0px;
+}
+
+.box-header.with-border{
+    border-bottom:0px;
+}
+
+.content-wrapper {
+    background: #f3f5f7;
+}
+
+.btn-default {
+    background-color: #fff !important;
+    border-color: #dde6e9 !important;
+}
+
+    .btn-default:hover {
+        background-color: #4b71fa !important;
+        border-color: #4b71fa !important;
+        color: #fff !important;
+        opacity: 0.9;
+    }
+
+    .btn-default:focus {
+        border-color: #4b71fa !important;
+        background: #4b71fa !important;
+        color: #fff;
+    }
+
+.btn-primary {
+    background-color: #4b71fa !important;
+    border-color: #4b71fa !important;
+    color: #fff !important;
+}
+
+    .btn-primary:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        background-color: #4b71fa !important;
+        border-color: #4b71fa !important;
+    }
+
+    .btn-primary:focus {
+        color: #fff;
+        background-color: #4b71fa !important;
+        border-color: #4b71fa !important;
+    }
+
+.btn-info {
+    background-color: #36a3f7 !important;
+    border-color: #36a3f7 !important;
+    color: #fff !important;
+}
+
+    .btn-info:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        background-color: #36a3f7 !important;
+        border-color: #36a3f7 !important;
+    }
+
+    .btn-info:focus {
+        color: #fff !important;
+        background-color: #36a3f7 !important;
+        border-color: #36a3f7 !important;
+    }
+
+.btn-success {
+    background-color: #7bcb4d !important;
+    border-color: #7bcb4d !important;
+    color: #fff !important;
+}
+
+    .btn-success:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        border-color: #7bcb4d !important;
+    }
+
+    .btn-success:focus {
+        color: #fff !important;
+        border-color: #7bcb4d !important;
+    }
+
+.btn-warning {
+    background-color: #F6BB42 !important;
+    border-color: #F6BB42 !important;
+    color: #fff !important;
+}
+
+    .btn-warning:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        background-color: #F6BB42 !important;
+        border-color: #F6BB42 !important;
+    }
+
+    .btn-warning:focus {
+        color: #fff !important;
+        background-color: #F6BB42 !important;
+        border-color: #F6BB42 !important;
+    }
+
+.btn-danger {
+    background-color: #f4516c !important;
+    border-color: #f4516c !important;
+    color: #fff !important;
+}
+
+    .btn-danger:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        background-color: #f4516c !important;
+        border-color: #f4516c !important;
+    }
+
+    .btn-danger:focus {
+        color: #fff !important;
+        background-color: #f4516c !important;
+        border-color: #f4516c !important;
+    }
+
+.btn-teal {
+    background-color: #00c5dc !important;
+    border-color: #00c5dc !important;
+    color: #fff !important;
+}
+
+    .btn-teal:hover {
+        color: #fff !important;
+        opacity: 0.9;
+        border-color: #00c5dc !important;
+    }
+
+    .btn-teal:focus {
+        color: #fff !important;
+        border-color: #00c5dc !important;
+    }
+
+
+/* =============   Button  ============= */
+.btn-space {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.btn {
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    font-size: 14px;
+    line-height: 1.538462;
+    font-weight: 400;
+    padding: 7px 15px;
+    border-radius: 25px;
+}
+
+    .btn.btn-block {
+        width: 100%;
+        display: block;
+    }
+
+    .btn.box-shadow {
+        -webkit-box-shadow: 0px 6px 15px 0px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0px 6px 15px 0px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 6px 15px 0px rgba(0, 0, 0, 0.1);
+        border: 2px solid !important;
+        border-color: #FFFFFF !important;
+    }
+
+    .btn.btn-sm {
+        padding: 6px 10px;
+    }
+
+    .btn.btn-lg {
+        padding: 10px 30px;
+        font-size: 16px;
+    }
+
+    .btn.btn-xs {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+
+    .btn.btn-rounded {
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        overflow: hidden;
+    }
+
+    .btn.btn-circle {
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        padding: 9px 10px;
+    }
+
+    .btn.btn-icon {
+        position: relative;
+        overflow: hidden;
+        padding-left: 50px;
+    }
+
+        .btn.btn-icon i {
+            position: absolute;
+            height: 100%;
+            line-height: 100%;
+            width: 40px;
+            line-height: 38px;
+            text-align: center;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+    .btn.btn-border {
+        background-color: transparent;
+    }
+
+        .btn.btn-border:hover {
+            opacity: 1 !important;
+        }
+
+        .btn.btn-border.btn-default {
+            border: 1px solid #dde6e9;
+        }
+
+            .btn.btn-border.btn-default:hover {
+                background-color: #4b71fa;
+            }
+
+            .btn.btn-border.btn-default:focus {
+                background-color: #4b71fa;
+            }
+
+        .btn.btn-border.btn-primary {
+            color: #4b71fa;
+            border: 1px solid #4b71fa;
+        }
+
+            .btn.btn-border.btn-primary:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-primary:hover {
+                background-color: #4b71fa;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-success {
+            color: #7bcb4d;
+            border: 1px solid #7bcb4d;
+        }
+
+            .btn.btn-border.btn-success:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-success:hover {
+                background-color: #7bcb4d;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-info {
+            color: #56afd7;
+            border: 1px solid #56afd7;
+        }
+
+            .btn.btn-border.btn-info:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-info:hover {
+                background-color: #56afd7;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-warning {
+            color: #f8c200;
+            border: 1px solid #f8c200;
+        }
+
+            .btn.btn-border.btn-warning:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-warning:hover {
+                background-color: #f8c200;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-danger {
+            color: #f4516c;
+            border: 1px solid #f4516c;
+        }
+
+            .btn.btn-border.btn-danger:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-danger:hover {
+                background-color: #f4516c;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-indigo {
+            color: #796AEE;
+            border: 1px solid #796AEE;
+        }
+
+            .btn.btn-border.btn-indigo:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-indigo:hover {
+                background-color: #796AEE;
+                color: #fff;
+            }
+
+        .btn.btn-border.btn-teal {
+            color: #26A69A;
+            border: 1px solid #26A69A;
+        }
+
+            .btn.btn-border.btn-teal:focus {
+                background-color: transparent;
+            }
+
+            .btn.btn-border.btn-teal:hover {
+                background-color: #26A69A;
+                color: #fff;
+            }
+
+.box-header > .fa, .box-header > .glyphicon, .box-header > .ion, .box-header .box-title{
+    padding:10px;
+    font-weight:500;
+}
+
+.skin-blue-light .sidebar-menu > li > a > i .material-icons{
+
+}
+
+.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu > li.header {
+    white-space: normal;
+}
+
+.profile {
+    background-image: url(../img/bg-profil2.png);
+    background-size: cover;
+    /*background: #564FC1;*/
+}
+
+.user-panel {
+    position: relative;
+    width: 100%;
+    padding-left: 10px;
+    padding: 15px;
+    height: 95px;
+    overflow: hidden;
+}
+
+    .user-panel:before,
+    .user-panel:after {
+        content: " ";
+        display: table;
+    }
+
+    .user-panel:after {
+        clear: both;
+    }
+
+    .user-panel > .image > img {
+        width: 100%;
+        max-width: 50px;
+        height: auto;
+        border: 3px solid rgba(0,0,0,.14);
+    }
+
+    .user-panel > .info {
+        padding: 5px 5px 5px 15px;
+        line-height: 1;
+        position: absolute;
+        left: 55px;
+    }
+
+        .user-panel > .info > p {
+            font-weight: 600;
+            /*margin-bottom: 9px;*/
+            margin-bottom: 3px;
+            color: #fff;
+            text-shadow: 1px 1px 1px #444;
+        }
+
+        .user-panel > .info > a {
+            text-decoration: none;
+            padding-right: 5px;
+            margin-top: 3px;
+            font-size: 11px;
+            color: #fff !important;
+            text-shadow: 1px 1px 3px #444;
+            font-weight: 400;
+        }
+
+            .user-panel > .info > a > .fa,
+            .user-panel > .info > a > .ion,
+            .user-panel > .info > a > .glyphicon {
+                margin-right: 3px;
+            }
+
+/*Custom input type button*/
+label.file-upload {
+    position: relative;
+    overflow: hidden
+}
+
+    label.file-upload input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: 0;
+        background: #fff;
+        cursor: inherit;
+        display: block
+    }
+
+.btn-upload {
+    border-radius: 0px;
+    background: #fff !important;
+    border: 1.2px solid;
+    width: 100%;
+    color: #114dc1 !important;
+    margin-bottom:10px;
+}
+
+.btn-default-clear {
+    border-radius: 0px;
+    background: #fff !important;
+    border: 1.2px solid;
+    width: 100%;
+    color: #000 !important;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #4b0ba7;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+    margin-top:7px;
+}
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #4b0ba7;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+    margin-top:7px;
+}
+
+ul.timeline > li > a{
+   color:#4b0ba7;
+   font-size:20px;
+   text-decoration:none;
+}
+
+.footer-timeline p{
+    margin-bottom:0;
+}
+
+.timeline-pengumuman{
+    background:#fff;
+    height: calc(100vh - 150px);
+    overflow: auto;
+    border: 1px solid #eee;
+    border-radius: 20px;
+}

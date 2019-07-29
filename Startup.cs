@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ormawa.Models;
 using Ormawa.Services;
+using Ormawa.BusinessModel;
 
 namespace Ormawa
 {
@@ -38,7 +39,7 @@ namespace Ormawa
             services.AddMvc();
             services.AddMvcJQueryDataTables();
 
-            //services.AddTransient<Combobox>();
+            services.AddTransient<Combobox>();
             services.AddTransient<IFileService, FileService>();
 
             var connectionString = Configuration.GetSection("ConnectionStrings");

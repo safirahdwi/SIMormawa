@@ -35,7 +35,7 @@ namespace Ormawa.Controllers
         }
 
         // GET: Anggota/Create
-        public IActionResult AddorEdit()
+        public IActionResult Add()
         {
             //if (id == 0)
             //    return View(new Anggota());
@@ -51,7 +51,7 @@ namespace Ormawa.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public IActionResult AddOrEdit(DaftarAnggotaOrmawaViewModel vm)
+        public IActionResult Add(DaftarAnggotaOrmawaViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -68,9 +68,9 @@ namespace Ormawa.Controllers
                 _context.AnggotaOrmawa.Add(ormawa);
                 _context.SaveChanges();
                 //return RedirectToAction(nameof(Daftaranggota));
-                return RedirectToAction("Daftaranggota", "Anggota");
+                return RedirectToAction("Daftaranggota", "DaftarAnggota");
             }
-            return RedirectToAction("Daftaranggota", "Anggota");
+            return RedirectToAction("Daftaranggota", "DaftarAnggota");
         }
 
         // GET: Anggota/Delete/5

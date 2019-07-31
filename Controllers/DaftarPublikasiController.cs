@@ -31,6 +31,7 @@ namespace Ormawa.Controllers
         public IActionResult Add()
         {
             DaftarPublikasiOrmawaViewModel vm = new DaftarPublikasiOrmawaViewModel();
+            //Daftar Ormawa
             vm.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
             return View(vm);
         }

@@ -8,6 +8,7 @@ namespace Ormawa.Models
         public Mahasiswa()
         {
             AnggotaOrmawa = new HashSet<AnggotaOrmawa>();
+            PrestasiOrmawa = new HashSet<PrestasiOrmawa>();
         }
 
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace Ormawa.Models
         public virtual MahasiswaMagister MahasiswaMagister { get; set; }
         public virtual MahasiswaSarjana MahasiswaSarjana { get; set; }
         public virtual ICollection<AnggotaOrmawa> AnggotaOrmawa { get; set; }
+        public virtual ICollection<PrestasiOrmawa> PrestasiOrmawa { get; set; }
     }
 }

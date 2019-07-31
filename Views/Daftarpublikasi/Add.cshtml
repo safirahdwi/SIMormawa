@@ -1,4 +1,4 @@
-﻿@model Ormawa.ViewModels.DaftarPrestasiOrmawaViewModel
+﻿@model Ormawa.ViewModels.DaftarPublikasiOrmawaViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,38 +13,27 @@
 <section class="content">
     <div class="row">
         <div class="col-md-4">
-            <form asp-controller="DaftarPrestasi" asp-action="Add" method="post">
+            <form asp-controller="PublikasiOrmawa" asp-action="Add" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<input type="hidden" asp-for="Id" />*@
-                <div class="form-group">
-                    <label class="control-label"> Mahasiswa</label>
-                    @Html.DropDownListFor(model => model.MahasiswaId, Model.ListMahasiswa, "..Pilih Mahasiswa..", new { @class = "form-control select2 cari-mahasiswa" })
-                    <span asp-validation-for="MahasiswaId" class="text-danger"></span>
-                </div>
                 <div class="form-group">
                     <label class="control-label">Ormawa</label>
                     @Html.DropDownListFor(model => model.OrganisasiOrmawaId, Model.ListOrmawa, "..Pilih Ormawa..", new { @class = "form-control select2 cari-ormawa" })
                     <span asp-validation-for="OrganisasiOrmawaId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Tahun</label>
-                    <input asp-for="Tahun" class="form-control" />
-                    <span asp-validation-for="Tahun" class="text-danger"></span>
+                    <label class="control-label">Judul</label>
+                    <input asp-for="Judul" class="form-control" />
+                    <span asp-validation-for="Judul" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Jenis Prestasi</label>
-                    @Html.DropDownListFor(model => model.JenisPrestasiOrmawaId, Model.ListJenisPrestasi, "..Pilih Jenis Prestasi..", new { @class = "form-control select2 cari-jenisprestasi" })
-                    <span asp-validation-for="JenisPrestasiOrmawaId" class="text-danger"></span>
+                    <label class="control-label">Isi</label>
+                    <input asp-for="Isi" style="width: 100%; height: 100px; font-size: 18px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" />
+                    <span asp-validation-for="Isi" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Nama Prestasi</label>
-                    <input asp-for="NamaPrestasi" class="form-control" />
-                    <span asp-validation-for="NamaPrestasi" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Institusi Penyelenggara</label>
-                    <input asp-for="InstitusiPenyelenggara" class="form-control" />
-                    <span asp-validation-for="InstitusiPenyelenggara" class="text-danger"></span>
+                <div class="form-group" col-md-6>
+                    <label class="control-label">Tanggal Publikasi</label>
+                    <input asp-for="TanggalInsert" class="form-control" type="date" />
+                    <span asp-validation-for="TanggalInsert" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -58,26 +47,6 @@
         </div>
     </div>
 </section>
-
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
-@section Styles{
-    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-}
-@section Scripts{
-    <script src="~/lib/select2/js/select2.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $(".cari-mahasiswa").select2({
-            //minimumInputLength: 2
-            width: '100%'
-        });
-    });
-
-    </script>
-}
 
 <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>

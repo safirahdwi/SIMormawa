@@ -637,6 +637,8 @@ namespace Ormawa.Models
 
                 entity.Property(e => e.JenisPrestasiOrmawaId).HasColumnName("JenisPrestasiOrmawaID");
 
+                entity.Property(e => e.MahasiswaId).HasColumnName("MahasiswaID");
+
                 entity.Property(e => e.NamaPrestasi)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -647,6 +649,11 @@ namespace Ormawa.Models
                     .WithMany(p => p.PrestasiOrmawa)
                     .HasForeignKey(d => d.JenisPrestasiOrmawaId)
                     .HasConstraintName("FK_PrestasiOrmawa_JenisPrestasiOrmawa");
+
+                entity.HasOne(d => d.Mahasiswa)
+                    .WithMany(p => p.PrestasiOrmawa)
+                    .HasForeignKey(d => d.MahasiswaId)
+                    .HasConstraintName("FK_PrestasiOrmawa_Mahasiswa");
 
                 entity.HasOne(d => d.OrganisasiOrmawa)
                     .WithMany(p => p.PrestasiOrmawa)

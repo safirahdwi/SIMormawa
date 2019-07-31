@@ -14,6 +14,7 @@ namespace Ormawa.ViewModels
         public int? JenisPrestasiOrmawaId { get; set; }
         public string NamaPrestasi { get; set; }
         public string InstitusiPenyelenggara { get; set; }
+        public int? MahasiswaId { get; set; }
 
         //Mahasiswa
         public int? OrangId { get; set; }
@@ -22,5 +23,6 @@ namespace Ormawa.ViewModels
 
         public IEnumerable<SelectListItem> ListOrmawa { get; set; }
         public IEnumerable<SelectListItem> ListJenisPrestasi { get; set; }
+        public IEnumerable<SelectListItem> ListMahasiswa { get; set; }
     }
 }

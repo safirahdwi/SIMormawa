@@ -35,6 +35,7 @@ namespace Ormawa.Controllers
             DaftarPrestasiOrmawaViewModel vm = new DaftarPrestasiOrmawaViewModel();
             vm.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
             vm.ListJenisPrestasi = new SelectList(_combobox.JenisPrestasiOrmawa(), "ID", "Value");
+            vm.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value");
             return View(vm);
         }
 
@@ -52,6 +53,7 @@ namespace Ormawa.Controllers
                 prestasi.JenisPrestasiOrmawaId = vm.JenisPrestasiOrmawaId;
                 prestasi.NamaPrestasi = vm.NamaPrestasi;
                 prestasi.InstitusiPenyelenggara = vm.InstitusiPenyelenggara;
+                prestasi.MahasiswaId = vm.MahasiswaId;
                 _context.PrestasiOrmawa.Add(prestasi);
                 _context.SaveChanges();
                 //return RedirectToAction(nameof(Daftaranggota));

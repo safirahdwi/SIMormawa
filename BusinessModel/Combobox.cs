@@ -1,4 +1,5 @@
-﻿using Ormawa.Models;
+﻿
+using Ormawa.Models;
 using Ormawa.ViewModel;
 using Ormawa.ViewModels;
 using System;
@@ -31,6 +32,8 @@ namespace Ormawa.BusinessModel
                       };
             return mhs.ToList();
         }
+
+        //DaftarOrmawa
         public List<ComboboxViewModel> Ormawa()
         {
             var orw = from m in _context.OrganisasiOrmawa
@@ -65,6 +68,7 @@ namespace Ormawa.BusinessModel
                       };
             return TipeKegiatan.ToList();
         }
+
         public List<ComboboxViewModel> JenisKegiatanOrmawa()
         {
             var JenisKegiatan = from m in _context.JenisKegiatanOrmawa

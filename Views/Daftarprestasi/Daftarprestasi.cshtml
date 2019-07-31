@@ -8,7 +8,6 @@
 <section class="content-header">
     <h1>
         Daftar Prestasi
-        <small>advanced tables</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="https://localhost:44384/Home/Beranda"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -53,6 +52,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+                                                @Html.DisplayNameFor(model => model.MahasiswaId)
+                                            </th>
+                                            <th>
                                                 @Html.DisplayNameFor(model => model.OrganisasiOrmawaId)
                                             </th>
                                             <th>
@@ -74,6 +76,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => modelItem.MahasiswaId)
+                                            </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => modelItem.OrganisasiOrmawaId)
                                             </td>

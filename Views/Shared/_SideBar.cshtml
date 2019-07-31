@@ -47,6 +47,16 @@
                     <i class="fa fa-table"></i> <span>Data Tables</span>
                 </a>
             </li>
+            <li class="@(Html.IsMenuActive("/DaftarAnggota/Index") ? "active" : "")">
+                <a asp-controller="DaftarAnggota" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Daftar Anggota</span>
+                </a>
+            </li>
+            <li class="@(Html.IsMenuActive("/OrganisasiOrmawa/Index") ? "active" : "")">
+                <a asp-controller="OrganisasiOrmawa" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Ormawa</span>
+                </a>
+            </li>
 
         </ul>
     </section>

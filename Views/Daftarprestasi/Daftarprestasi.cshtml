@@ -52,6 +52,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+                                                @Html.DisplayNameFor(model => model.MahasiswaId)
+                                            </th>
+                                            <th>
                                                 @Html.DisplayNameFor(model => model.OrganisasiOrmawaId)
                                             </th>
                                             <th>
@@ -73,6 +76,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => modelItem.MahasiswaId)
+                                            </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => modelItem.OrganisasiOrmawaId)
                                             </td>

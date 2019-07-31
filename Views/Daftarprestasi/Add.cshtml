@@ -17,6 +17,11 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @*<input type="hidden" asp-for="Id" />*@
                 <div class="form-group">
+                    <label class="control-label"> Mahasiswa</label>
+                    @Html.DropDownListFor(model => model.MahasiswaId, Model.ListMahasiswa, "..Pilih Mahasiswa..", new { @class = "form-control select2 cari-mahasiswa" })
+                    <span asp-validation-for="MahasiswaId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label class="control-label">Ormawa</label>
                     @Html.DropDownListFor(model => model.OrganisasiOrmawaId, Model.ListOrmawa, "..Pilih Ormawa..", new { @class = "form-control select2 cari-ormawa" })
                     <span asp-validation-for="OrganisasiOrmawaId" class="text-danger"></span>
@@ -41,11 +46,6 @@
                     <input asp-for="InstitusiPenyelenggara" class="form-control" />
                     <span asp-validation-for="InstitusiPenyelenggara" class="text-danger"></span>
                 </div>
-                @*<div class="form-group" col-md-6>
-                    <label asp-for="Jabatan" class="control-label"></label>
-                    <input asp-for="Id" class="form-control" />
-                    <span asp-validation-for="StatusAnggota" class="text-danger"></span>
-                </div>*@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <input type="submit" value="Submit" class="btn btn-primary btn-block" />

@@ -11,8 +11,10 @@ namespace Ormawa.Models
         public int? JenisPrestasiOrmawaId { get; set; }
         public string NamaPrestasi { get; set; }
         public string InstitusiPenyelenggara { get; set; }
+        public int? MahasiswaId { get; set; }
 
         public virtual JenisPrestasiOrmawa JenisPrestasiOrmawa { get; set; }
+        public virtual Mahasiswa Mahasiswa { get; set; }
         public virtual OrganisasiOrmawa OrganisasiOrmawa { get; set; }
     }
 }

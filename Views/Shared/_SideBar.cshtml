@@ -42,12 +42,27 @@
                     </li>
                 </ul>
             </li>
-            <li class="@(Html.IsMenuActive("/Default/DataTablesExample") ? "active" : "")">
-                <a asp-controller="Default" asp-action="DataTablesExample">
-                    <i class="fa fa-table"></i> <span>Data Tables</span>
+            <li class="@(Html.IsMenuActive("/OrganisasiOrmawa/Index") ? "active" : "")">
+                <a asp-controller="OrganisasiOrmawa" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Organisasi Ormawa</span>
                 </a>
             </li>
-
+            <li class="@(Html.IsMenuActive("/Upload/Index") ? "active" : "")">
+                <a asp-controller="Upload" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Pengajuan Dokumen</span>
+                </a>
+            </li>
+            <li class="@(Html.IsMenuActive("/DaftarAnggota/Daftaranggota") ? "active" : "")">
+                <a asp-controller="DaftarAnggota" asp-action="Daftaranggota">
+                    <i class="fa fa-table"></i> <span>Daftar Anggota</span>
+                </a>
+            </li>
+            <li class="@(Html.IsMenuActive("/DaftarPrestasi/Daftarprestasi") ? "active" : "")">
+                <a asp-controller="DaftarPrestasi" asp-action="Daftarprestasi">
+                    <i class="fa fa-table"></i> <span>Daftar Prestasi</span>
+                </a>
+            </li>
+           
         </ul>
     </section>
     <!-- /.sidebar -->

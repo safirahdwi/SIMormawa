@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Mvc.JQuery.DataTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Ormawa.ViewModels
         public string NamaPrestasi { get; set; }
         public string InstitusiPenyelenggara { get; set; }
         public int? MahasiswaId { get; set; }
+        public DataTableConfigVm DataTableConfigVm { get; set; }
 
         //Mahasiswa
         public int? OrangId { get; set; }

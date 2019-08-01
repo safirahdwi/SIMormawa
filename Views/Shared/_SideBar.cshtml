@@ -52,9 +52,14 @@
                     <i class="fa fa-table"></i> <span>Daftar Anggota</span>
                 </a>
             </li>
+            <li class="@(Html.IsMenuActive("/DaftarPrestasi/Index") ? "active" : "")">
+                <a asp-controller="DaftarPrestasi" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Daftar Prestasi</span>
+                </a>
+            </li>
             <li class="@(Html.IsMenuActive("/OrganisasiOrmawa/Index") ? "active" : "")">
                 <a asp-controller="OrganisasiOrmawa" asp-action="Index">
-                    <i class="fa fa-table"></i> <span>Ormawa</span>
+                    <i class="fa fa-table"></i> <span>Daftar Ormawa</span>
                 </a>
             </li>
 

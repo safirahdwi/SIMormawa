@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Mvc.JQuery.DataTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace Ormawa.ViewModels
         public string Urldokumen { get; set; }
         public int? JenisDokumenId { get; set; } 
         public IFormFile FileDokumen { get; set; }
-
+        public DataTableConfigVm DataTableConfigVm { get; set; }
     }
     }

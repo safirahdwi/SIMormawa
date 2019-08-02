@@ -1,11 +1,63 @@
-﻿@model Ormawa.ViewModels.UploadViewModel
-<h1>Home Page</h1>
+﻿@model Ormawa.ViewModels.UploadViewModel;
 
-<div>
-    <h4>Upload File</h4>
-    <form role="form" enctype="multipart/form-data" method="post" asp-controller="Upload" asp-action="MultipleFiles">
-        <input asp-for="FileDokumen" type="file" />
-        <input asp-for="Nama"/>
-        <button type="submit">Submit</button>
-    </form>
-</div>
+@{
+    ViewBag.Title = "Daftar Dokumen";
+}
+
+@section Styles {
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/lib/datatables.net-bs/css/dataTables.bootstrap.min.css">
+}
+
+@section Scripts {
+    <!-- DataTables -->
+    <script src="~/lib/datatables.net/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                       Dokumen Pengajuan
+                    </h3>
+
+                </div>
+                <div>
+                    <form method="get" action="/Upload/Upload">
+                        <button type="submit">Upload Dokumen</button>
+                    </form>
+                   
+                </div>
+                    <!-- /.box-header -->
+                <div class="box-body">
+                    @Model.Nama
+                    <br />
+                    @Model.Urldokumen
+                    @{
+                        Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
+                    }
+                    <partial name="DataTable" model="Model.DataTableConfigVm" />
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

@@ -13,14 +13,6 @@ namespace Ormawa.ViewModels
         [DataTables]
         public string Nama { get; set; }
         [DataTables]
-        public string NamaEn { get; set; }
-        [DataTables]
-        public string NomorSk { get; set; }
-        [DataTables]
-        public DateTime? Tmt { get; set; }
-        [DataTables]
-        public DateTime? Tst { get; set; }
-        [DataTables]
         public string JenisOrganisasi { get; set; }
         [DataTables]
         public string Aksi { get; set; }

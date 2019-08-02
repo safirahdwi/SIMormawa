@@ -1,4 +1,5 @@
-﻿using Mvc.JQuery.DataTables;
+﻿using Microsoft.EntityFrameworkCore;
+using Mvc.JQuery.DataTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,16 @@ namespace Ormawa.ViewModels
         [DataTables]
         public string OrganisasiOrmawa { get; set; }
         [DataTables]
-        public int? Tahun { get; set; }
-        [DataTables]
-        public string JenisPrestasiOrmawa { get; set; }
+        public string Mahasiswa { get; set; }
         [DataTables]
         public string NamaPrestasi { get; set; }
         [DataTables]
+        public string JenisPrestasiOrmawa { get; set; }
+        [DataTables]
         public string InstitusiPenyelenggara { get; set; }
         [DataTables]
-        public string Mahasiswa { get; set; }
+        public int? Tahun { get; set; }
+
         public string Aksi { get; set; }
 
     }

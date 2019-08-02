@@ -44,6 +44,8 @@ namespace Ormawa.Controllers
         {
             vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value");
             vmod.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
+            vmod.ListJabatan = new SelectList(_combobox.JenisJabatanOrmawa(), "ID", "Value");
+            vmod.ListAnggotaOrmawa = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
             return View(vmod);
         }
         [HttpPost]
@@ -51,13 +53,22 @@ namespace Ormawa.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+
                 AnggotaOrmawa ormawa = new AnggotaOrmawa();
                 ormawa.MahasiswaId = vmod.MahasiswaId;
                 ormawa.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
-                ormawa.TanggalBergabung = vmod.TanggalBergabung;
+                ormawa.TanggalBergabung = vmod.Tmt;
                 ormawa.StatusAnggota = vmod.StatusAnggota;
                 _context.AnggotaOrmawa.Add(ormawa);
+
+                StrukturalOrmawa struktur = new StrukturalOrmawa();
+                struktur.AnggotaOrmawaId = ormawa.Id;
+                struktur.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
+                struktur.JabatanOrmawaId = vmod.JabatanOrmawaId;
+                struktur.Tmt = vmod.Tmt;
+                struktur.Tst = vmod.Tst;
+                _context.StrukturalOrmawa.Add(struktur);
+
                 _context.SaveChanges();
                 //return RedirectToAction(nameof(Daftaranggota));
                 return RedirectToAction("Index", "DaftarAnggota");

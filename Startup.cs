@@ -39,14 +39,15 @@ namespace Ormawa
             services.AddMvc();
             services.AddMvcJQueryDataTables();
 
+            var connectionString = Configuration.GetSection("ConnectionStrings");
+            services.AddDbContext<DBINTEGRASI_MASTER_BAYUPPKU2Context>(options => options.UseSqlServer(connectionString["DefaultConnection"]).UseLoggerFactory(DbLoggerFactory));
+
             services.AddTransient<Combobox>();
+            services.AddTransient<UploadRepo>();
             services.AddTransient<OrganisasiOrmawaRepo>();
             services.AddTransient<DaftarAnggotaRepo>();
             services.AddTransient<DaftarPrestasiRepo>();
             services.AddTransient<IFileService, FileService>();
-
-            var connectionString = Configuration.GetSection("ConnectionStrings");
-            services.AddDbContext<DBINTEGRASI_MASTER_BAYUPPKU2Context>(options => options.UseSqlServer(connectionString["DefaultConnection"]).UseLoggerFactory(DbLoggerFactory));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

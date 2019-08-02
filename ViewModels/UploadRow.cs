@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Ormawa.ViewModels
 {
-    public class OrganisasiOrmawaRow
+    public class UploadRow
     {
         [DataTables(Visible =false)]
         public int Id { get; set; }
         [DataTables]
         public string Nama { get; set; }
         [DataTables]
-        public string JenisOrganisasi { get; set; }
+        public string Urldokumen { get; set; }
+        [DataTables]
+        public string JenisDokumen { get; set; }
         [DataTables]
         public string Aksi { get; set; }
     }

@@ -18,6 +18,8 @@ namespace Ormawa.ViewModels
         public DateTime? TanggalBergabung { get; set; }
         [DataTables]
         public bool? StatusAnggota { get; set; }
+        [DataTables]
+        public string Jabatan { get; set; }
         public string Aksi { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Ormawa.ViewModels.DaftarAnggotaOrmawaViewModel;
+﻿@model Ormawa.ViewModels.DaftarAnggotaOrmawaViewModel
 
 @{
     ViewBag.Title = "Data Tables Example";
@@ -17,7 +17,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
+     <h1>
         @ViewBag.Title
     </h1>
     <ol class="breadcrumb">
@@ -37,10 +37,7 @@
                     </h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    @Model.MahasiswaId
-                    <br />
-                    @Model.OrganisasiOrmawaId
+                <div class="box-body">                    
                     @{
                         Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
                     }

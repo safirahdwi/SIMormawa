@@ -63,19 +63,23 @@
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }*@
 @section Styles{
-    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
 }
 @section Scripts{
-    <script src="~/lib/select2/js/select2.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
         $(".cari-mahasiswa").select2({
-            //minimumInputLength: 2
+            minimumInputLength: 2,
+            width: '100%'
+        });
+        $(".cari-ormawa").select2({
+            width: '100%'
+        });
+        $(".cari-jenisprestasi").select2({
             width: '100%'
         });
     });
-
     </script>
 }
 

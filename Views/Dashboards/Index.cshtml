@@ -1,0 +1,13 @@
+﻿@model Ormawa.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+ 
+@foreach (var i in Model.ListPublikasi)
+{
+    @i.Nama <br />
+    @i.Judul <br />
+    @i.Isi <br />
+    @i.TanggalInsert <br /><br />
+}
+

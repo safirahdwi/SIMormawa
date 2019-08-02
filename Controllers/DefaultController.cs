@@ -25,11 +25,11 @@ namespace Ormawa.Controllers
         {
             return RedirectToAction("DataTablesExample", "Default");
         }
-
+       
         [Authorize]
         public IActionResult DataTablesExample()
         {
-            OrganisasiOrmawaVM vmod = new OrganisasiOrmawaVM();
+            OrganisasiOrmawaVM vmod = new OrganisasiOrmawaVM(); 
             var dataProviderUrl = Url.Action("DataTablesExampleDataProvider");
             var viewModel = DataTablesHelper.DataTableVm<OrganisasiOrmawaRow>("dataTable", dataProviderUrl);
 

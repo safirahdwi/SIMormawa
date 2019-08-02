@@ -26,21 +26,11 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview @(Html.IsMenuActive("/Dashboards") ? "active" : "")">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dashboards</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+           
+            <li class="@(Html.IsMenuActive("/Dashboards/Index") ? "active" : "")">
+                <a asp-controller="Dashboards" asp-action="Index">
+                    <i class="fa fa-table"></i> <span>Dasboard</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/Dashboards/Dashboard1") ? "active" : "")">
-                        <a asp-controller="Dashboards" asp-action="Dashboard1"><i class="fa fa-circle-o"></i> Dashboard v1</a>
-                    </li>
-                    <li class="@(Html.IsMenuActive("/Dashboards/Dashboard2") ? "active" : "")">
-                        <a asp-controller="Dashboards" asp-action="Dashboard2"><i class="fa fa-circle-o"></i> Dashboard v2</a>
-                    </li>
-                </ul>
             </li>
             <li class="@(Html.IsMenuActive("/Default/DataTablesExample") ? "active" : "")">
                 <a asp-controller="Default" asp-action="DataTablesExample">
@@ -62,7 +52,18 @@
                     <i class="fa fa-table"></i> <span>Daftar Ormawa</span>
                 </a>
             </li>
+            <li class="@(Html.IsMenuActive("/Upload/Index") ? "active" : "")">
+                <a asp-controller="Upload" asp-action="Index">
+                    <i class="fa fa-folder"></i> <span>Pengarsipan</span>
 
+                </a>
+            </li>
+            <li class="@(Html.IsMenuActive("/DaftarPublikasi/Index") ? "active" : "")">
+                <a asp-controller="DaftarPublikasi" asp-action="Index">
+                    <i class="fa fa-comments"></i> <span>Publikasi</span>
+
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

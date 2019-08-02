@@ -47,13 +47,13 @@ namespace Ormawa.Controllers
         public string Buttonstring(int ID)
         {
             var res = "<div class='btn-group'>"
-                         + "<a href='/OrganisasiOrmawa/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
+                         + "<a href='/OrganisasiOrawa/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
                            + "<span class='fa fa-pencil'></span>"
                          + "</a>"
-                         + "<a href='/OrganisasiOrmawa/Detail/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
+                         + "<a href='/OrganisasiOrawa/Detail/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
                            + "<span class='fa fa-calendar-o'></span>"
                          + "</a>"
-                         + "<a href='/OrganisasiOrmawa/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
+                         + "<a href='/OrganisasiOrawa/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
                            + "<span class='fa fa-trash'></span>"
                          + "</a>"
                     + "</div>";

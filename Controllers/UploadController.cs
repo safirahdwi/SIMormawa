@@ -13,6 +13,7 @@ using Ormawa.ViewModels;
 using Ormawa.Controllers;
 using Ormawa.ViewModels;
 using Mvc.JQuery.DataTables;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Ormawa.Controllers
 {
@@ -21,16 +22,18 @@ namespace Ormawa.Controllers
         private readonly DBINTEGRASI_MASTER_BAYUPPKU2Context _db;
         private IHostingEnvironment _context;
         private string _dir;
+        private readonly Combobox _combobox;
         private readonly IFileService _fileService;
         UploadViewModel vmod = new UploadViewModel();
         private readonly UploadRepo _repo;
 
-        public UploadController(IHostingEnvironment context, IFileService fileservices, DBINTEGRASI_MASTER_BAYUPPKU2Context db, UploadRepo repo)
+        public UploadController(IHostingEnvironment context, IFileService fileservices, DBINTEGRASI_MASTER_BAYUPPKU2Context db, UploadRepo repo, Combobox combobox)
         {
             _context = context;
             _dir = _context.ContentRootPath;
             _fileService = fileservices;
             _db = db;
+            _combobox = combobox;
             _repo = repo;
         }
       
@@ -56,6 +59,7 @@ namespace Ormawa.Controllers
             return DataTablesResult.Create(query, param, row => new
             {
                 // custom formatting
+                no = no++,
                 Aksi = Buttonstring(row.Id)
             });
         }
@@ -66,7 +70,7 @@ namespace Ormawa.Controllers
                          + "<a href='/Upload/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
                            + "<span class='fa fa-pencil'></span>"
                          + "</a>"
-                         + "<a href='/Upload/Detail/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
+                         + "<a href='/Upload/Details/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
                            + "<span class='fa fa-calendar-o'></span>"
                          + "</a>"
                          + "<a href='/Upload/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
@@ -76,6 +80,9 @@ namespace Ormawa.Controllers
             return res;
         }
         public IActionResult Upload() {
+            vmod.ListTipe = new SelectList(_combobox.TipeKegiatanOrmawa(), "ID", "Value");
+            vmod.ListJenis = new SelectList(_combobox.JenisKegiatanOrmawa(), "ID", "Value");
+            vmod.ListPj = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
             return View(vmod);
         }
 
@@ -95,12 +102,8 @@ namespace Ormawa.Controllers
 
                     vmod.Urldokumen = $"https://{await _fileService.UploadDokumen($"test_{dok}", vmod.FileDokumen)}";
 
-                    DokumenOrmawa dokumen = new DokumenOrmawa();
-                    dokumen.Nama = vmod.Nama;
-                    dokumen.Urldokumen = vmod.Urldokumen;
-                    dokumen.JenisDokumenId = vmod.JenisDokumenId;
-                    _db.DokumenOrmawa.Add(dokumen);
-                    _db.SaveChanges();
+                    _repo.Insert(vmod);
+                   
                     //return RedirectToAction(nameof(Daftaranggota));
                     SetSuccessNotification("Dokumen Berhasil di Upload");
                     return RedirectToAction("Index", "Upload");
@@ -114,5 +117,13 @@ namespace Ormawa.Controllers
             }
         }
       
+        public IActionResult Details(int id)
+        {
+            var DetailUpload = _repo.GetDetail(id);
+            vmod = DetailUpload;
+
+            return View(vmod);
+        }
+
     }
 }

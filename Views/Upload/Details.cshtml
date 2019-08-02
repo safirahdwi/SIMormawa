@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #474e5d;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /* The actual timeline (the vertical ruler) */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+            /* The actual timeline (the vertical ruler) */
+            .timeline::after {
+                content: '';
+                position: absolute;
+                width: 6px;
+                background-color: white;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                margin-left: -3px;
+            }
+
+        /* Container around content */
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+        }
+
+
+
+        /* Full-width containers */
+        .container {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+    </style>
+</head>
+<body class="">
+    <div class="timeline">
+        <div class="container left">
+            <div class="content">
+                <h4><b><u>Nama Kegiatan</u></b></h4>
+                <h5>@Model.Kegiatan</h5>
+                <br />
+                <h4><b><u>Pelaksana</u></b></h4>
+                <h5>@Model.AnggotaOrmawa</h5>
+                <br />
+                <h4><b><u>Nama Penanggung Jawab</u></b></h4>
+                <h5>@Model.PenanggungJawab</h5>
+                <br />
+                <h4><b><u>Nama Dokumen</u></b></h4>
+                <h5>@Model.NamaDokumen</h5>
+                <br />
+                <h4><b><u>Jenis Kegiatan</u></b></h4>
+                <h5>@Model.jenis</h5>
+                <br />
+                <h4><b><u>Tipe Kegiatan</u></b></h4>
+                <h5>@Model.tipe</h5>
+                <br />
+                <h4><b><u>Dana Anggaran</u></b></h4>
+                <h5>@Model.DanaAnggaran</h5>
+                <br />
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -44,6 +44,7 @@ namespace Ormawa
             services.AddTransient<OrganisasiOrmawaRepo>();
             services.AddTransient<DaftarAnggotaRepo>();
             services.AddTransient<DaftarPrestasiRepo>();
+            services.AddTransient<PublikasiRepo>();
             services.AddTransient<IFileService, FileService>();
 
             var connectionString = Configuration.GetSection("ConnectionStrings");

@@ -27,14 +27,13 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">CATEGORIES</li>
-            <li class="treeview @(Html.IsMenuActive("/Dashboards") ? "active" : "")">
+            <li class="@(Html.IsMenuActive("/Dashboards/Index") ? "active" : "")">
                 <a href="#">
-                    <i class="fa fa-home"></i> <span>Beranda</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-            </li>
+                   
+                    <a asp-controller="Dashboards" asp-action="Index">
+                        <i class="fa fa-home"></i> <span>Beranda</span>
+                    </a>
+</li>
             <li class="@(Html.IsMenuActive("/Default/DataTablesExample") ? "active" : "")">
                 <a asp-controller="Default" asp-action="DataTablesExample">
                     <i class="fa fa-table"></i> <span>Data Tables</span>

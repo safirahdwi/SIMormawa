@@ -25,30 +25,28 @@ namespace Ormawa.BusinessModel
                             Id = o.Id,
                             JenisOrganisasi = j.Nama,
                             Nama = o.Nama,
-                            NamaEn = o.NamaEn,
-                            NomorSk = o.NomorSk,
-                            Tmt = o.Tmt,
-                            Tst = o.Tst
+                          
                         };
             return query;
         }
 
-        public OrganisasiOrmawaVM GetOrganisasiDetails(int id)
+        public IEnumerable<OrganisasiOrmawaVM> GetOrganisasiDetails(int id)
         {
-            var query = from o in _context.OrganisasiOrmawa
-                        join j in _context.JenisOrganisasi on o.JenisOrganisasiId equals j.Id
-                        where o.Id == id
+            var query = from i in _context.AnggotaOrmawa
+                        join j in _context.OrganisasiOrmawa on i.OrganisasiOrmawaId equals j.Id
+                        join mhs in _context.Mahasiswa on i.MahasiswaId equals mhs.Id
+                        join org in _context.Orang on mhs.OrangId equals org.Id
+                        where j.Id == id
                         select new OrganisasiOrmawaVM
                         {
-                            Id = o.Id,
-                            JenisOrganisasi = j.Nama,
-                            Nama = o.Nama,
-                            NamaEn = o.NamaEn,
-                            NomorSk = o.NomorSk,
-                            Tmt = o.Tmt,
-                            Tst = o.Tst
+                            Id = i.Id,
+                            Mahasiswa = org.Nama,
+                            OrganisasiOrmawa = j.Nama,
+                            StatusAnggota = i.StatusAnggota
                         };
-            return query.FirstOrDefault();
+            return query.ToList();
         }
+
+        
     }
 }

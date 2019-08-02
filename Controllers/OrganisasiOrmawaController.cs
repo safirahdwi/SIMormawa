@@ -12,10 +12,12 @@ namespace Ormawa.Controllers
     public class OrganisasiOrmawaController : Controller
     {
         private readonly OrganisasiOrmawaRepo _repo;
+        private readonly DaftarAnggotaRepo _anggotaRepo;
         OrganisasiOrmawaVM vmod = new OrganisasiOrmawaVM();
-        public OrganisasiOrmawaController(OrganisasiOrmawaRepo repo)
+        public OrganisasiOrmawaController(OrganisasiOrmawaRepo repo, DaftarAnggotaRepo anggotaRepo)
         {
             _repo = repo;
+            _anggotaRepo = anggotaRepo;
         }
 
         public IActionResult Index()
@@ -60,10 +62,21 @@ namespace Ormawa.Controllers
             return res;
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int id) 
         {
-            vmod = _repo.GetOrganisasiDetails(id);
-            return View(vmod);
+            //var dataProviderUrl = Url.Action("DataTablesDaftarAnggota", new { id });
+            // var viewModel = DataTablesHelper.DataTableVm<DaftarAnggotaOrmawaRow>("dataTable", dataProviderUrl);
+
+            // viewModel.ShowFilterInput = true;
+            // viewModel.PageLength = 10;
+
+            //vmod.DataTableConfigVm = viewModel;
+            OrganisasiOrmawaVM vm = new OrganisasiOrmawaVM();
+            vm.GetDetails = _repo.GetOrganisasiDetails(id);
+           
+            return View(vm);
+
         }
+
     }
 }

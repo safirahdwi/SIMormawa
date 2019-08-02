@@ -92,6 +92,18 @@ namespace Ormawa.BusinessModel
             return JenisPrestasi.ToList();
         }
 
+        //StrukturalOrmawa
+        public List<ComboboxViewModel> JenisJabatanOrmawa()
+        {
+            var JabatanOrmawa = from m in _context.JabatanOrmawa
+                                select new ComboboxViewModel
+                                {
+                                    ID = m.Id.ToString(),
+                                    Value = m.Nama
+                                };
+            return JabatanOrmawa.ToList();
+        }
+
         /* public List<ComboboxViewModel> PenanggungJawabOrmawa()
          {
              var JenisKegiatan = from m in _context.Pen

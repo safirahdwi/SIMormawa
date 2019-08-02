@@ -1,7 +1,7 @@
-﻿@model Ormawa.ViewModels.UploadViewModel;
+﻿@model Ormawa.ViewModels.DaftarPrestasiOrmawaViewModel;
 
 @{
-    ViewBag.Title = "Daftar Dokumen";
+    ViewBag.Title = "Data Tables Example";
 }
 
 @section Styles {
@@ -33,26 +33,18 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">
-                       Dokumen Pengajuan
+                        Data Tables
                     </h3>
-
                 </div>
-                <div>
-                    <form method="get" action="/Upload/Upload">
-                        <button type="submit">Upload Dokumen</button>
-                    </form>
-                   
-                </div>
-                    <!-- /.box-header -->
+                <!-- /.box-header -->
                 <div class="box-body">
-                    @Model.Nama
+                    @Model.MahasiswaId
                     <br />
-                    @Model.Urldokumen
+                    @Model.OrganisasiOrmawaId
                     @{
                         Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
                     }
                     <partial name="DataTable" model="Model.DataTableConfigVm" />
-
                 </div>
                 <!-- /.box-body -->
             </div>

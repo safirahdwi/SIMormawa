@@ -73,25 +73,28 @@
         <h1>Pengajuan Proposal</h1>
         <p>Isi data berikut serta lampirkan proposal</p>
         <hr>
-
-        <label for="Kegiatan"><b>Nama Kegiatan</b></label>
-        <input type="text" placeholder="Nama Kegiatan" name="Kegiatan" required>
-
-        <label for="TipeKegiatanOrmawa"><b>Tipe Kegiatan</b></label>
-        <input type="text" placeholder="Tipe Kegiatan" name="TipeKegiatanOrmawa" required>
-
-        <label for="JenisKegiatanOrmawa"><b>Jenis Kegiatan</b></label>
-        <input type="text" placeholder="Jenis Kegiatan" name="JenisKegiatanOrmawa" required>
-
-        <label for="PenanggungJawabID"><b>Penanggung Jawab Acara</b></label>
-        <input type="text" placeholder="Nama Penanggung Jawab" name="PenanggungJawabID" required>
-
-        <label for="DanaAnggaran"><b>Dana Anggaran</b></label>
-        <input type="text" placeholder="Dana Anggaran" name="DanaAnggaran" required>
-
-        <label for="Upload"><b>Upload Dokumen</b></label>
         <form role="form" enctype="multipart/form-data" method="post" asp-controller="Upload" asp-action="MultipleFiles">
-            <input asp-for="Nama" placeholder="Nama Dokumen" name="Nama" required />
+            <label for="Kegiatan"><b>Nama Kegiatan</b></label>
+            <input asp-for="Kegiatan" type="text" placeholder="Nama Kegiatan" required>
+
+            <label for="TipeKegiatanOrmawa"><b>Tipe Kegiatan</b></label>
+            @Html.DropDownListFor(model => model.TipeKegiatanOrmawaId, Model.ListTipe, "..Pilih Tipe..", new { @class = "form-control select2 cari-tipe" })
+
+
+            <label for="JenisKegiatanOrmawa"><b>Jenis Kegiatan</b></label>
+
+            @Html.DropDownListFor(model => model.JenisKegiatanOrmawaId, Model.ListJenis, "..Pilih Jenis..", new { @class = "form-control select2 cari-jenis" })
+
+            <label for="PenanggungJawabID"><b>Penanggung Jawab Acara</b></label>
+
+            @Html.DropDownListFor(model => model.PenanggungJawabId, Model.ListPj, "..Pilih Penanggung Jawab..", new { @class = "form-control select2 cari-pj" })
+
+            <label for="DanaAnggaran"><b>Dana Anggaran</b></label>
+            <input asp-for="DanaAnggaran" type="number" placeholder="Dana Anggaran" required>
+            <br />
+            <label for="Upload"><b>Upload Dokumen</b></label>
+
+            <input asp-for="Nama" placeholder="Nama Dokumen" required />
             <input asp-for="FileDokumen" type="file" />
             <hr />
             <button type="submit">Submit</button>

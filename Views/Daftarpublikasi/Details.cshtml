@@ -1,0 +1,46 @@
+﻿@model Ormawa.ViewModels.DaftarPublikasiOrmawaViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #474e5d;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /* Full-width containers */
+        .container {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+function goBack() {
+  window.history.back();
+}
+    </script>
+    <div class="timeline">
+        <div class="container left">
+            <div class="content">
+                <h2>@Model.Judul</h2>@Model.TanggalInsert
+                <br>
+                <br />
+                @Model.Isi
+</body>
+            </div>
+                </div>
+                </div>
+

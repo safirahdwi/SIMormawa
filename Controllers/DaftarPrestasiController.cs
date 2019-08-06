@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Mvc.JQuery.DataTables;
 using Ormawa.BusinessModel;
 using Ormawa.Models;
@@ -26,6 +27,7 @@ namespace Ormawa.Controllers
             _context = context;
             _combobox = combobox;
         }
+
         public IActionResult Index()
         {
             var dataProviderUrl = Url.Action("DataTables");
@@ -39,7 +41,7 @@ namespace Ormawa.Controllers
             return View(vmod);
         }
 
-            // GET: Anggota/Create
+        // GET:/Create
         public IActionResult Add()
         {
             vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value");
@@ -48,7 +50,7 @@ namespace Ormawa.Controllers
             return View(vmod);
         }
 
-        // POST: Anggota/Create
+        // POST:/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -70,15 +72,6 @@ namespace Ormawa.Controllers
             return RedirectToAction("Index", "DaftarPrestasi");
         }
 
-        // GET: Anggota/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            var prestasi = await _context.PrestasiOrmawa.FindAsync(id);
-            _context.PrestasiOrmawa.Remove(prestasi);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         public DataTablesResult<DaftarPrestasiOrmawaRow> DataTables(DataTablesParam param)
         {
             var query = _repo.GetDaftarPrestasiList();
@@ -92,19 +85,41 @@ namespace Ormawa.Controllers
             });
         }
 
+        // GET:/Delete/
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var prestasi = await _context.PrestasiOrmawa.FirstOrDefaultAsync(m => m.Id == id);
+            if (prestasi == null)
+            {
+                return NotFound();
+            }
+            return View(prestasi);
+        }
+
+        // POST: /Delete/
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var prestasi = await _context.PrestasiOrmawa.FindAsync(id);
+            _context.PrestasiOrmawa.Remove(prestasi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         public string Buttonstring(int ID)
         {
             var res = "<div class='btn-group'>"
                          + "<a href='DaftarPrestasi/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
                            + "<span class='fa fa-pencil'></span>"
                          + "</a>"
-                         + "<a href='/DaftarPrestasi/Detail/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
-                           + "<span class='fa fa-calendar-o'></span>"
-                         + "</a>"
-                         + "<a href='/DaftarPrestasi/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
+                         + "<a href='/DaftarPrestasi/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat'>"
                            + "<span class='fa fa-trash'></span>"
-                         + "</a>"
-                    + "</div>";
+                         + "</a>";
             return res;
         }
     }

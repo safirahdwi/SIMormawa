@@ -34,7 +34,7 @@ namespace Ormawa.BusinessModel
         }
 
         //DaftarOrmawa
-        public List<ComboboxViewModel> Ormawa()
+        public List<ComboboxViewModel> OrganisasiOrmawa()
         {
             var orw = from m in _context.OrganisasiOrmawa
                       select new ComboboxViewModel

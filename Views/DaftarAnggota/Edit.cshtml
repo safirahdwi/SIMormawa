@@ -1,0 +1,94 @@
+﻿@model Ormawa.ViewModels.DaftarAnggotaOrmawaViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@*<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.min.js"></script>*@
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>*@
+<!-- Content Header (Page header) -->
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="DaftarAnggota" asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="StrukturOrmawaId" />
+                <div class="form-group">
+                    <label class="control-label"> Mahasiswa</label>
+                    @Html.DropDownListFor(model => model.MahasiswaId, Model.ListMahasiswa, "..Pilih Mahasiswa..", new { @class = "form-control select2 cari-mahasiswa" })
+
+                    <span asp-validation-for="MahasiswaId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Ormawa</label>
+                    @Html.DropDownListFor(model => model.OrganisasiOrmawaId, Model.ListOrmawa, "..Pilih Ormawa..", new { @class = "form-control select2 cari-ormawa" })
+                    <span asp-validation-for="OrganisasiOrmawaId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Jabatan</label>
+                    @Html.DropDownListFor(model => model.JabatanOrmawaId, Model.ListJabatan, "..Pilih Jabatan..", new { @class = "form-control select2 cari-jabatan" })
+                    <span asp-validation-for="JabatanOrmawaId" class="text-danger"></span>
+                </div>
+                <div class="form-group" col-md-6>
+                    <label class="control-label">Tanggal Bergabung</label>
+                    <input asp-for="Tmt" class="form-control" type="date" />
+                    <span asp-validation-for="Tmt" class="text-danger"></span>
+                </div>
+                <div class="form-group" col-md-6>
+                    <label class="control-label">Tanggal Selesai</label>
+                    <input asp-for="Tst" class="form-control" type="date" />
+                    <span asp-validation-for="Tst" class="text-danger"></span>
+                </div>
+                <div class="form-group" col-md-6>
+                    <label class="control-label">Status Anggota</label>
+                    <input asp-for="StatusAnggota" type="radio" value="true" /> Aktif &nbsp;
+                    <input asp-for="StatusAnggota" type="radio" value="false" /> Tidak Aktif &nbsp;
+                    <span asp-validation-for="StatusAnggota" class="text-danger"></span>
+                </div>
+                @*<div class="form-group" col-md-6>
+            <label asp-for="Jabatan" class="control-label"></label>
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="StatusAnggota" class="text-danger"></span>
+        </div>*@
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
+@section Styles{
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(".cari-mahasiswa").select2({
+            minimumInputLength: 2,
+            width: '100%'
+        });
+        $(".cari-ormawa").select2({
+            //minimumInputLength: 2,
+            width: '100%'
+        });
+        $(".cari-jabatan").select2({
+            //minimumInputLength: 2,
+            width: '100%'
+        });
+    });
+
+    </script>
+}

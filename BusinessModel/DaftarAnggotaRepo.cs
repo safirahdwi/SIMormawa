@@ -1,4 +1,5 @@
-﻿using Ormawa.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Ormawa.Models;
 using Ormawa.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -32,22 +33,74 @@ namespace Ormawa.BusinessModel
                             OrganisasiOrmawa = m.OrganisasiOrmawa.Nama,
                             StatusAnggota = m.StatusAnggota,
                             Jabatan = struk.JabatanOrmawa.Nama
-                            
                         };
             return query;
         }
-
-        public AnggotaOrmawa AddAnggotaOrmawa(AnggotaOrmawa ao)
+        public DaftarAnggotaOrmawaViewModel GetDetailAnggota(int Id)
         {
-            _context.AnggotaOrmawa.Add(ao);
-            return ao;
+            var anggota = from m in _context.AnggotaOrmawa
+                          join o in _context.Mahasiswa on m.MahasiswaId equals o.Id
+                          join p in _context.Orang on o.OrangId equals p.Id
+                          join ms1 in _context.MahasiswaSarjana on o.Id equals ms1.MahasiswaId
+                          join struk in _context.StrukturalOrmawa on m.Id equals struk.AnggotaOrmawaId
+                          where m.Id == Id
+                          select new DaftarAnggotaOrmawaViewModel
+                       {
+                              Id = m.Id,
+                              MahasiswaId = o.Id,
+                              Mahasiswa = p.Nama,
+                              TanggalBergabung = m.TanggalBergabung,
+                              OrganisasiOrmawaId = m.OrganisasiOrmawa.Id,
+                              OrganisasiOrmawa = m.OrganisasiOrmawa.Nama,
+                              StatusAnggota = m.StatusAnggota,
+                              JabatanOrmawaId = struk.JabatanOrmawa.Id,
+                              Jabatan = struk.JabatanOrmawa.Nama,
+                              Tmt = struk.Tmt,
+                              Tst = struk.Tst,
+                              StrukturOrmawaId = struk.Id
+                          };
+            return anggota.FirstOrDefault();
         }
-
-       /* public void AddStukturOrmawa()
+        public void AddAnggotaOrmawa(DaftarAnggotaOrmawaViewModel vmod)
         {
-            var anggota = AddAnggotaOrmawa();
-        }*/
+            AnggotaOrmawa ormawa = new AnggotaOrmawa();
+            ormawa.MahasiswaId = vmod.MahasiswaId;
+            ormawa.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
+            ormawa.TanggalBergabung = vmod.Tmt;
+            ormawa.StatusAnggota = vmod.StatusAnggota;
+            _context.AnggotaOrmawa.Add(ormawa);
+
+            StrukturalOrmawa struktur = new StrukturalOrmawa();
+            struktur.AnggotaOrmawaId = ormawa.Id;
+            struktur.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
+            struktur.JabatanOrmawaId = vmod.JabatanOrmawaId;
+            struktur.Tmt = vmod.Tmt;
+            struktur.Tst = vmod.Tst;
+            _context.StrukturalOrmawa.Add(struktur);
+
+            _context.SaveChanges();
+        }
+        public void EditAnggotaOrmawa(DaftarAnggotaOrmawaViewModel vmod)
+        {
+            AnggotaOrmawa ormawa = _context.AnggotaOrmawa.Find(vmod.Id);
+            ormawa.MahasiswaId = vmod.MahasiswaId;
+            ormawa.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
+            ormawa.TanggalBergabung = vmod.Tmt;
+            ormawa.StatusAnggota = vmod.StatusAnggota;
+            _context.Entry(ormawa).State = EntityState.Modified;
+
+            StrukturalOrmawa struktur = _context.StrukturalOrmawa.Find(vmod.StrukturOrmawaId);            
+            struktur.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
+            struktur.JabatanOrmawaId = vmod.JabatanOrmawaId;
+            struktur.Tmt = vmod.Tmt;
+            struktur.Tst = vmod.Tst;
+            _context.Entry(struktur).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+        /* public void AddStukturOrmawa()
+         {
+             var anggota = AddAnggotaOrmawa();
+         }*/
     }
 
 }
-

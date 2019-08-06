@@ -32,7 +32,7 @@ namespace Ormawa.Controllers
         {
             DaftarPublikasiOrmawaViewModel vm = new DaftarPublikasiOrmawaViewModel();
             //Daftar Ormawa
-            vm.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
+            vm.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value");
             return View(vm);
         }
 

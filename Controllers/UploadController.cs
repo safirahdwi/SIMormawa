@@ -11,7 +11,6 @@ using Ormawa.Models;
 using Ormawa.Services;
 using Ormawa.ViewModels;
 using Ormawa.Controllers;
-using Ormawa.ViewModels;
 using Mvc.JQuery.DataTables;
 
 namespace Ormawa.Controllers

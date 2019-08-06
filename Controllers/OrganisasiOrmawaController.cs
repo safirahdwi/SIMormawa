@@ -32,7 +32,6 @@ namespace Ormawa.Controllers
 
             return View(vmod);
         }
-
         public DataTablesResult<OrganisasiOrmawaRow> DataTables(DataTablesParam param)
         {
             var query = _repo.GetOrganisasiList();

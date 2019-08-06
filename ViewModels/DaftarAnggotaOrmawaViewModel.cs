@@ -16,6 +16,11 @@ namespace Ormawa.ViewModels
         public bool? StatusAnggota { get; set; }
         public DataTableConfigVm DataTableConfigVm { get; set; }
 
+        public string Mahasiswa { get; set; }
+        public string OrganisasiOrmawa { get; set; }
+        public string Jabatan { get; set; }
+        public int? StrukturOrmawaId { get; set; }
+
         // Struktural Ormawa
         public int? AnggotaOrmawaId { get; set; }
         public int? JabatanOrmawaId { get; set; }

@@ -44,7 +44,7 @@ namespace Ormawa.Controllers
         // GET:/Create
         public IActionResult Add()
         {
-            vmod.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
+            vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value");
             vmod.ListJenisPrestasi = new SelectList(_combobox.JenisPrestasiOrmawa(), "ID", "Value");
             vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value");
             return View(vmod);

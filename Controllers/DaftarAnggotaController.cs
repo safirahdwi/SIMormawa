@@ -43,9 +43,9 @@ namespace Ormawa.Controllers
         public IActionResult Add()
         {
             vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value");
-            vmod.ListOrmawa = new SelectList(_combobox.Ormawa(), "ID", "Value");
+            vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value");
             vmod.ListJabatan = new SelectList(_combobox.JenisJabatanOrmawa(), "ID", "Value");
-            vmod.ListAnggotaOrmawa = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
+            //vmod.ListAnggotaOrmawa = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
             return View(vmod);
         }
         [HttpPost]
@@ -54,34 +54,11 @@ namespace Ormawa.Controllers
             if (ModelState.IsValid)
             {
 
-                AnggotaOrmawa ormawa = new AnggotaOrmawa();
-                ormawa.MahasiswaId = vmod.MahasiswaId;
-                ormawa.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
-                ormawa.TanggalBergabung = vmod.Tmt;
-                ormawa.StatusAnggota = vmod.StatusAnggota;
-                _context.AnggotaOrmawa.Add(ormawa);
-
-                StrukturalOrmawa struktur = new StrukturalOrmawa();
-                struktur.AnggotaOrmawaId = ormawa.Id;
-                struktur.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
-                struktur.JabatanOrmawaId = vmod.JabatanOrmawaId;
-                struktur.Tmt = vmod.Tmt;
-                struktur.Tst = vmod.Tst;
-                _context.StrukturalOrmawa.Add(struktur);
-
-                _context.SaveChanges();
+                _repo.AddAnggotaOrmawa(vmod);
                 //return RedirectToAction(nameof(Daftaranggota));
-                return RedirectToAction("Index", "DaftarAnggota");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "DaftarAnggota");
-        }
-        // GET: Anggota/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            var anggota = await _context.AnggotaOrmawa.FindAsync(id);
-            _context.AnggotaOrmawa.Remove(anggota);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         public DataTablesResult<DaftarAnggotaOrmawaRow> DataTables(DataTablesParam param)
@@ -111,6 +88,27 @@ namespace Ormawa.Controllers
                          + "</a>"
                     + "</div>";
             return res;
+        }
+        public IActionResult Edit(int Id)
+        {
+            vmod = _repo.GetDetailAnggota(Id);
+            vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value", vmod.MahasiswaId);
+            vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value", vmod.AnggotaOrmawaId);
+            vmod.ListJabatan = new SelectList(_combobox.JenisJabatanOrmawa(), "ID", "Value");
+            //vmod.ListAnggotaOrmawa = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
+            return View(vmod);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DaftarAnggotaOrmawaViewModel vmod)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.EditAnggotaOrmawa(vmod);
+                //return RedirectToAction(nameof(Daftaranggota));
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", "DaftarAnggota");
         }
     }
 }

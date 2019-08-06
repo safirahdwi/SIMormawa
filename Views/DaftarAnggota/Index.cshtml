@@ -1,7 +1,7 @@
 ﻿@model Ormawa.ViewModels.DaftarAnggotaOrmawaViewModel
 
 @{
-    ViewBag.Title = "Data Tables Example";
+    ViewBag.Title = "Daftar Anggota";
 }
 
 @section Styles {
@@ -17,7 +17,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-     <h1>
+    <h1>
         @ViewBag.Title
     </h1>
     <ol class="breadcrumb">
@@ -32,12 +32,13 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">
-                        Data Tables
-                    </h3>
-                </div>
+                        <form method="get" action="/Daftaranggota/Add">
+                            <br />
+                            <button type="submit" class="btn btn-success btn-xs"> Add <span class="glyphicon glyphicon-plus"></span></button>
+                        </form>
+                    </div>
                 <!-- /.box-header -->
-                <div class="box-body">                    
+                <div class="box-body">
                     @{
                         Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
                     }
@@ -45,8 +46,8 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-            <!-- /.box -->
-        </div>
+                <!-- /.box -->
+            </div>
         <!-- /.col -->
     </div>
 </section>

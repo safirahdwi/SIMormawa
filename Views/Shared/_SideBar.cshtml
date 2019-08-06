@@ -28,15 +28,8 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">CATEGORIES</li>
             <li class="@(Html.IsMenuActive("/Dashboards/Index") ? "active" : "")">
-                <a href="#">
-                   
-                    <a asp-controller="Dashboards" asp-action="Index">
-                        <i class="fa fa-home"></i> <span>Beranda</span>
-                    </a>
-</li>
-            <li class="@(Html.IsMenuActive("/Default/DataTablesExample") ? "active" : "")">
-                <a asp-controller="Default" asp-action="DataTablesExample">
-                    <i class="fa fa-table"></i> <span>Data Tables</span>
+                <a asp-controller="Dashboards" asp-action="Index">
+                    <i class="fa fa-home"></i> <span>Beranda</span>
                 </a>
             </li>
             <li class="@(Html.IsMenuActive("/DaftarAnggota/Index") ? "active" : "")">
@@ -66,7 +59,7 @@
             </li>
             <li class="@(Html.IsMenuActive("/Upload/Index") ? "active" : "")">
                 <a asp-controller="Upload" asp-action="Index">
-                    <i class="fa fa-folder"></i> <span>Pengarsipan</span>
+                    <i class="fa fa-folder"></i> <span>Laporan Kegiatan</span>
 
                 </a>
             </li>

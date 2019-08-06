@@ -12,31 +12,61 @@
 <script src="~/lib/ckeditor/ckeditor.js"></script>
 <!DOCTYPE html>
 
-<head>
-    Publikasi Ormawa
-</head>
+@{
+    ViewBag.Title = "Membuat Publikasi";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<br />
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-10">
         <form asp-controller="DaftarPublikasi" asp-action="Add" method="post">
-            <label class="control-label">Ormawa</label>
-            @Html.DropDownListFor(model => model.OrganisasiOrmawaId, Model.ListOrmawa, "..Pilih Ormawa..", new { @class = "form-control select2 cari-ormawa" })
+            @Html.DropDownListFor(model => model.OrganisasiOrmawaId, Model.ListOrmawa, ".. Pilih Ormawa ..", new { @class = "form-control select2 cari-ormawa" })
             <span asp-validation-for="OrganisasiOrmawaId" class="text-danger"></span>
 
             @*<label class="control-label">Tanggal Publikasi</label>
                 <input asp-for="TanggalInsert" class="form-control" type="date" />
                 <span asp-validation-for="TanggalInsert" class="text-danger"></span>*@
 
-            <div class="box-body col-md-6">
-                <textarea asp-for="Judul" class="textarea" placeholder="Title"
-                          style="height: 50px; font-size: 35px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-
+            <div class="box-body col-md-10">
+                <textarea asp-for="Judul" class="textarea" placeholder="Judul"
+                          style="height: 40px; font-size: 18px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                <br />
                 <textarea id="CKeditor" asp-for="Isi" class="textarea" placeholder="Place some text here"
                           style="height: 450px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                <input type="submit" value="Post">
+                <br />
+                <input class="btn btn-primary" type="submit" value="Post">
             </div>
         </form>
     </div>
 </div>
+
 <script>
     CKEDITOR.replace("CKeditor");
 </script>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
+@section Styles{
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".cari-ormawa").select2({
+                width: '100%'
+            });
+        });
+    </script>
+}

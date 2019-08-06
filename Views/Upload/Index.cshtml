@@ -1,7 +1,7 @@
 ﻿@model Ormawa.ViewModels.UploadViewModel;
 
 @{
-    ViewBag.Title = "Daftar Dokumen";
+    ViewBag.Title = "Daftar Dokumen Laporan";
 }
 
 @section Styles {
@@ -32,27 +32,19 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">
-                       Dokumen Pengajuan
-                    </h3>
-
-                </div>
-                <div>
                     <form method="get" action="/Upload/Upload">
-                        <button type="submit">Upload Dokumen</button>
+                        <br />
+                        <button type="submit" class="btn btn-success btn-xs"> Add <span class="glyphicon glyphicon-plus"></span></button>
                     </form>
-                   
                 </div>
-                    <!-- /.box-header -->
+                <!-- /.box-header -->
                 <div class="box-body">
                     @Model.Nama
-                    <br />
                     @Model.Urldokumen
                     @{
                         Model.DataTableConfigVm.TableClass = "table table-bordered table-striped";
                     }
                     <partial name="DataTable" model="Model.DataTableConfigVm" />
-
                 </div>
                 <!-- /.box-body -->
             </div>

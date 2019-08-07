@@ -58,18 +58,11 @@ namespace Ormawa.Controllers
         {
             if (ModelState.IsValid)
             {
-                PrestasiOrmawa prestasi = new PrestasiOrmawa();
-                prestasi.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
-                prestasi.Tahun = vmod.Tahun;
-                prestasi.JenisPrestasiOrmawaId = vmod.JenisPrestasiOrmawaId;
-                prestasi.NamaPrestasi = vmod.NamaPrestasi;
-                prestasi.InstitusiPenyelenggara = vmod.InstitusiPenyelenggara;
-                prestasi.MahasiswaId = vmod.MahasiswaId;
-                _context.PrestasiOrmawa.Add(prestasi);
-                _context.SaveChanges();
-                return RedirectToAction("Index", "DaftarPrestasi");
+
+                _repo.AddPrestasiOrmawa(vmod);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "DaftarPrestasi");
+            return RedirectToAction("Index");
         }
 
         public DataTablesResult<DaftarPrestasiOrmawaRow> DataTables(DataTablesParam param)
@@ -85,32 +78,6 @@ namespace Ormawa.Controllers
             });
         }
 
-        // GET:/Delete/
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var prestasi = await _context.PrestasiOrmawa.FirstOrDefaultAsync(m => m.Id == id);
-            if (prestasi == null)
-            {
-                return NotFound();
-            }
-            return View(prestasi);
-        }
-
-        // POST: /Delete/
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var prestasi = await _context.PrestasiOrmawa.FindAsync(id);
-            _context.PrestasiOrmawa.Remove(prestasi);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         public string Buttonstring(int ID)
         {
             var res = "<div class='btn-group'>"
@@ -119,8 +86,29 @@ namespace Ormawa.Controllers
                          + "</a>"
                          + "<a href='/DaftarPrestasi/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat'>"
                            + "<span class='fa fa-trash'></span>"
-                         + "</a>";
+                         + "</a>"
+                      + "</div>"; ;
             return res;
+        }
+        public IActionResult Edit(int Id)
+        {
+            vmod = _repo.GetDetailPrestasi(Id);
+            vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value", vmod.MahasiswaId);
+            vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value", vmod.OrganisasiOrmawaId);
+            vmod.ListJenisPrestasi = new SelectList(_combobox.JenisPrestasiOrmawa(), "ID", "Value",vmod.JenisPrestasiOrmawaId);
+            return View(vmod);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DaftarPrestasiOrmawaViewModel vmod)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.EditPrestasiOrmawa(vmod);
+                //return RedirectToAction(nameof(Daftaranggota));
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", "DaftarPrestasi");
         }
     }
 }

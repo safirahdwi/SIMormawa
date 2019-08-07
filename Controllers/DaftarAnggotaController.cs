@@ -48,6 +48,7 @@ namespace Ormawa.Controllers
             //vmod.ListAnggotaOrmawa = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
             return View(vmod);
         }
+
         [HttpPost]
         public IActionResult Add(DaftarAnggotaOrmawaViewModel vmod)
         {

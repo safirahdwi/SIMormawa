@@ -18,6 +18,10 @@ namespace Ormawa.ViewModels
         public int? MahasiswaId { get; set; }
         public DataTableConfigVm DataTableConfigVm { get; set; }
 
+        public string Mahasiswa { get; set; }
+        public string OrganisasiOrmawa { get; set; }
+        public string JenisPrestasiOrmawa { get; set; }
+
         //Mahasiswa
         public int? OrangId { get; set; }
         public int? StrataId { get; set; }

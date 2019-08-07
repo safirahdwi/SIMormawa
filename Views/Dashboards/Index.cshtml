@@ -2,12 +2,19 @@
 @{
     ViewData["Title"] = "Index";
 }
- 
-@foreach (var i in Model.ListPublikasi)
-{
-    @i.Nama <br />
-    @i.Judul <br />
-    @i.Isi <br />
-    @i.TanggalInsert <br /><br />
-}
-
+<html>
+<body>
+    @foreach (var i in Model.ListPublikasi)
+    {
+        @i.Nama
+        <br />
+        @i.Judul
+        <br />
+        @Html.Raw(@i.Isi)
+        <br />
+        @i.TanggalInsert
+        <br />
+        <br />
+    }
+</body>
+</html>

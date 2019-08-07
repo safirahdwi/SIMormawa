@@ -23,7 +23,6 @@ namespace Ormawa.BusinessModel
                         //join s in _context.JenisPrestasiOrmawa on m.Id equals s.Id
                         join o in _context.Mahasiswa on m.MahasiswaId equals o.Id
                         join p in _context.Orang on o.OrangId equals p.Id
-                        join ms1 in _context.MahasiswaSarjana on o.Id equals ms1.MahasiswaId
                         select new DaftarPrestasiOrmawaRow
                         {
                             Id = m.Id,
@@ -32,7 +31,7 @@ namespace Ormawa.BusinessModel
                             Tahun = m.Tahun,
                             JenisPrestasiOrmawa = m.JenisPrestasiOrmawa.Nama,
                             NamaPrestasi = m.NamaPrestasi,
-                            InstitusiPenyelenggara = m.InstitusiPenyelenggara,
+                            InstitusiPenyelenggara = m.InstitusiPenyelenggara
                         };
             return query;
         }

@@ -22,7 +22,6 @@ namespace Ormawa.BusinessModel
             var query = from m in _context.AnggotaOrmawa
                         join o in _context.Mahasiswa on m.MahasiswaId equals o.Id
                         join p in _context.Orang on o.OrangId equals p.Id
-                        join ms1 in _context.MahasiswaSarjana on o.Id equals ms1.MahasiswaId
                         join struk in _context.StrukturalOrmawa on m.Id equals struk.AnggotaOrmawaId
                         //where m.OrganisasiOrmawaId == id
                         select new DaftarAnggotaOrmawaRow
@@ -32,7 +31,8 @@ namespace Ormawa.BusinessModel
                             TanggalBergabung = m.TanggalBergabung,
                             OrganisasiOrmawa = m.OrganisasiOrmawa.Nama,
                             StatusAnggota = m.StatusAnggota,
-                            Jabatan = struk.JabatanOrmawa.Nama
+                            Jabatan = struk.JabatanOrmawa.Nama,
+                            IdStruktural = struk.Id
                         };
             return query;
         }
@@ -96,6 +96,18 @@ namespace Ormawa.BusinessModel
             struktur.Tst = vmod.Tst;
             _context.Entry(struktur).State = EntityState.Modified;
             _context.SaveChanges();
+        }
+        public void DeleteAnggotaOrmawa(int Id)
+        {
+            var struktural = _context.StrukturalOrmawa.Find(Id);
+            var anggota = _context.AnggotaOrmawa.Find(struktural.AnggotaOrmawaId);
+            _context.StrukturalOrmawa.Remove(struktural);
+            _context.AnggotaOrmawa.Remove(anggota);
+            _context.SaveChanges();
+            //var s = _context.AnggotaOrmawa.Where(x=>x.Id==Id);
+            //var xv = from i in _context.AnggotaOrmawa
+            //        where i.Id == Id
+            //        select i;
         }
         /* public void AddStukturOrmawa()
          {

@@ -13,7 +13,7 @@ using Ormawa.ViewModels;
 
 namespace Ormawa.Controllers
 {
-    public class DaftarAnggotaController : Controller
+    public class DaftarAnggotaController : AbstractBaseController
     {
         private readonly DaftarAnggotaRepo _repo;
         private readonly DBINTEGRASI_MASTER_BAYUPPKU2Context _context;
@@ -70,11 +70,11 @@ namespace Ormawa.Controllers
             return DataTablesResult.Create(query, param, row => new
             {
                 // custom formatting
-                Aksi = Buttonstring(row.Id)
+                Aksi = Buttonstring(row.Id,row.IdStruktural)
             });
         }
 
-        public string Buttonstring(int ID)
+        public string Buttonstring(int ID, int? IdStruktural)
         {
             var res = "<div class='btn-group'>"
                          + "<a href='DaftarAnggota/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
@@ -83,8 +83,8 @@ namespace Ormawa.Controllers
                          + "<a href='/DaftarAnggota/Detail/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
                            + "<span class='fa fa-calendar-o'></span>"
                          + "</a>"
-                         + "<a href='/DaftarAnggota/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
-                           + "<span class='fa fa-trash'></span>"
+                         + "<a onclick='Delete(" + IdStruktural + ")' class='btn btn-danger btn-sm btn-flat'>"
+                           + "<span class='fa fa-trash' style='color:white'></span>"
                          + "</a>"
                     + "</div>";
             return res;
@@ -109,6 +109,20 @@ namespace Ormawa.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", "DaftarAnggota");
+        }
+
+        public void DeleteAnggota(int Id)
+        {
+            try
+            {
+                _repo.DeleteAnggotaOrmawa(Id);
+                SetSuccessNotification("Data removed successfully");
+            }
+            catch (Exception e)
+            {
+                var a = e.Message;
+                SetErrorNotification("Failed to remove data");
+            }
         }
     }
 }

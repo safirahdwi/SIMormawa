@@ -20,6 +20,8 @@ namespace Ormawa.ViewModels
         public bool? StatusAnggota { get; set; }
         [DataTables]
         public string Jabatan { get; set; }
+        [DataTables(Visible = false)]
+        public int? IdStruktural { get; set; }
         public string Aksi { get; set; }
     }
 }

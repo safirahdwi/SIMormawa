@@ -19,6 +19,7 @@ namespace Ormawa.ViewModels
 
         public string Mahasiswa { get; set; }
         public string OrganisasiOrmawa { get; set; }
+        public string JabatanOrmawa { get; set; }
         public DateTime? TanggalBergabung { get; set; }
         public bool? StatusAnggota { get; set; }
         public DataTableConfigVm DataTableConfigVm { get; set; }

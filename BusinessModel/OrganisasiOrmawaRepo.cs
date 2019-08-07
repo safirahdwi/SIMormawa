@@ -36,13 +36,15 @@ namespace Ormawa.BusinessModel
                         join j in _context.OrganisasiOrmawa on i.OrganisasiOrmawaId equals j.Id
                         join mhs in _context.Mahasiswa on i.MahasiswaId equals mhs.Id
                         join org in _context.Orang on mhs.OrangId equals org.Id
+                        join struk in _context.StrukturalOrmawa on i.Id equals struk.AnggotaOrmawaId
                         where j.Id == id
                         select new OrganisasiOrmawaVM
                         {
                             Id = i.Id,
                             Mahasiswa = org.Nama,
                             OrganisasiOrmawa = j.Nama,
-                            StatusAnggota = i.StatusAnggota
+                            StatusAnggota = i.StatusAnggota,
+                            JabatanOrmawa = struk.JabatanOrmawa.Nama
                         };
             return query.ToList();
         }

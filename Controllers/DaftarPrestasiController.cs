@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Mvc.JQuery.DataTables;
 using Ormawa.BusinessModel;
 using Ormawa.Models;
@@ -14,7 +13,7 @@ using Ormawa.ViewModels;
 
 namespace Ormawa.Controllers
 {
-    public class DaftarPrestasiController : Controller
+    public class DaftarPrestasiController : AbstractBaseController
     {
         private readonly DaftarPrestasiRepo _repo;
         private readonly DBINTEGRASI_MASTER_BAYUPPKU2Context _context;
@@ -84,8 +83,8 @@ namespace Ormawa.Controllers
                          + "<a href='DaftarPrestasi/Edit/" + ID + "' class='btn btn-warning btn-sm btn-flat'>"
                            + "<span class='fa fa-pencil'></span>"
                          + "</a>"
-                         + "<a href='/DaftarPrestasi/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat'>"
-                           + "<span class='fa fa-trash'></span>"
+                         + "<a onclick='Delete(" + ID + ")' class='btn btn-danger btn-sm btn-flat'>"
+                           + "<span class='fa fa-trash' style='color:white'></span>"
                          + "</a>"
                       + "</div>"; ;
             return res;
@@ -95,7 +94,7 @@ namespace Ormawa.Controllers
             vmod = _repo.GetDetailPrestasi(Id);
             vmod.ListMahasiswa = new SelectList(_combobox.Mahasiswa(), "ID", "Value", vmod.MahasiswaId);
             vmod.ListOrmawa = new SelectList(_combobox.OrganisasiOrmawa(), "ID", "Value", vmod.OrganisasiOrmawaId);
-            vmod.ListJenisPrestasi = new SelectList(_combobox.JenisPrestasiOrmawa(), "ID", "Value",vmod.JenisPrestasiOrmawaId);
+            vmod.ListJenisPrestasi = new SelectList(_combobox.JenisPrestasiOrmawa(), "ID", "Value", vmod.JenisPrestasiOrmawaId);
             return View(vmod);
         }
 
@@ -109,6 +108,20 @@ namespace Ormawa.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", "DaftarPrestasi");
+        }
+
+        public void DeletePrestasi(int Id)
+        {
+            try
+            {
+                _repo.DeletePrestasiOrmawa(Id);
+                SetSuccessNotification("Data removed successfully");
+            }
+            catch (Exception e)
+            {
+                var a = e.Message;
+                SetErrorNotification("Failed to remove data");
+            }
         }
     }
 }

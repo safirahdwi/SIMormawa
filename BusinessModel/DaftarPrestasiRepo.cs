@@ -82,8 +82,12 @@ namespace Ormawa.BusinessModel
             _context.Entry(ormawa).State = EntityState.Modified;
             _context.SaveChanges();
         }
-
-
+        public void DeletePrestasiOrmawa(int Id)
+        {
+            var prestasi = _context.PrestasiOrmawa.Find(Id);
+            _context.PrestasiOrmawa.Remove(prestasi);
+            _context.SaveChanges();
+        }
     }
 
 }

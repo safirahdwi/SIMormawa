@@ -71,10 +71,11 @@ namespace Ormawa.Controllers
                          + "</a>"
                          + "<a href='/Upload/Details/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
                            + "<span class='fa fa-calendar-o'></span>"
-                        + "<a onclick='Delete(" + ID + ")' class='btn btn-danger btn-sm btn-flat'>"
-                           + "<span class='fa fa-trash' style='color:white'></span>"
                          + "</a>"
-                      + "</div>"; ;
+                         + "<a href='/Upload/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
+                           + "<span class='fa fa-trash'></span>"
+                         + "</a>"
+                    + "</div>";
             return res;
         }
         public IActionResult Upload() {
@@ -122,18 +123,6 @@ namespace Ormawa.Controllers
 
             return View(vmod);
         }
-        public void DeleteUpload(int Id)
-        {
-            try
-            {
-                _repo.DeleteUpload(Id);
-                SetSuccessNotification("Data removed successfully");
-            }
-            catch (Exception e)
-            {
-                var a = e.Message;
-                SetErrorNotification("Failed to remove data");
-            }
-        }
+
     }
 }

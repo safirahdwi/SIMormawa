@@ -65,14 +65,14 @@ namespace Ormawa.BusinessModel
                             url = dok.Urldokumen,
                             NamaDokumen = dok.Nama,
                             Kegiatan = peng.Kegiatan,
-
+                            
 
                         };
 
             return query.FirstOrDefault();
 
         }
-        public void Insert(UploadViewModel vmod)
+        public void Insert (UploadViewModel vmod)
         {
             DokumenOrmawa dokumen = new DokumenOrmawa();
             dokumen.Nama = vmod.Nama;
@@ -95,16 +95,5 @@ namespace Ormawa.BusinessModel
             _context.DaftarDokumenOrmawa.Add(daftar);
             _context.SaveChanges();
         }
-        public void DeleteUpload(int Id)
-        {
-            var daftar = _context.DaftarDokumenOrmawa.Find(Id);
-            _context.DaftarDokumenOrmawa.Remove(daftar);
-            _context.SaveChanges();
-
-        }
-    }
 }
-
-
-
-   
+}

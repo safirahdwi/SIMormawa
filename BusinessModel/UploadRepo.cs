@@ -1,4 +1,5 @@
-﻿using Ormawa.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Ormawa.Models;
 using Ormawa.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -57,9 +58,13 @@ namespace Ormawa.BusinessModel
                         {
                             Id = peng.Id,
                             Nama = jen.Nama,
+                            DokumenOrmawaId = dok.Id,
                             AnggotaOrmawa = ang.Mahasiswa.Orang.Nama,
+                            PenanggungJawabId = peng.PenanggungJawabId,
                             PenanggungJawab = pj.Mahasiswa.Orang.Nama,
+                            TipeKegiatanOrmawaId = peng.TipeKegiatanOrmawaId,
                             tipe = tipe.Nama,
+                            JenisKegiatanOrmawaId = peng.JenisKegiatanOrmawaId,
                             jenis = jen.Nama,
                             DanaAnggaran = Convert.ToInt64(peng.DanaAnggaran),
                             url = dok.Urldokumen,
@@ -95,5 +100,23 @@ namespace Ormawa.BusinessModel
             _context.DaftarDokumenOrmawa.Add(daftar);
             _context.SaveChanges();
         }
-}
+
+        public void Edit(UploadViewModel vmod)
+        {
+            DokumenOrmawa dokumen = _context.DokumenOrmawa.Find(vmod.DokumenOrmawaId);
+            dokumen.Nama = vmod.Nama;
+            dokumen.Urldokumen = vmod.Urldokumen;
+            _context.Entry(dokumen).State = EntityState.Modified;
+
+            PengajuanProposalKegiatan pengajuan = _context.PengajuanProposalKegiatan.Find(vmod.Id);
+            pengajuan.DanaAnggaran = vmod.DanaAnggaran;
+            pengajuan.Kegiatan = vmod.Kegiatan;
+            pengajuan.AnggotaOrmawaId = 2;
+            pengajuan.TipeKegiatanOrmawaId = vmod.TipeKegiatanOrmawaId;
+            pengajuan.JenisKegiatanOrmawaId = vmod.JenisKegiatanOrmawaId;
+            pengajuan.PenanggungJawabId = 7;
+            _context.Entry(pengajuan).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+    }
 }

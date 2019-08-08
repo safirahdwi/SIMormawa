@@ -28,6 +28,11 @@ namespace Ormawa.ViewModels
         public string jenis { get; set; }
         public string url { get; set; }
         public string NamaDokumen { get; set; }
+        public string TipeKegiatanOrmawa { get; set; }
+        public string JenisKegiatanOrmawa { get; set; }
+        public int PengajuanProposalId { get; set; }
+        public int DokumenOrmawaId { get; set; }
+
 
         public int? JenisDokumenId { get; set; } 
         public IFormFile FileDokumen { get; set; }

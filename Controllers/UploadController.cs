@@ -124,5 +124,25 @@ namespace Ormawa.Controllers
             return View(vmod);
         }
 
+        public IActionResult Edit(int Id)
+        {
+            vmod = _repo.GetDetail(Id);
+            vmod.ListTipe = new SelectList(_combobox.TipeKegiatanOrmawa(), "ID", "Value");
+            vmod.ListJenis = new SelectList(_combobox.JenisKegiatanOrmawa(), "ID", "Value");
+            vmod.ListPj = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value",vmod.AnggotaOrmawaId);
+            return View(vmod);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UploadViewModel vmod)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.Edit(vmod);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", "Upload");
+        }
+
     }
 }

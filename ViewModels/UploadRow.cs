@@ -15,7 +15,7 @@ namespace Ormawa.ViewModels
         [DataTables]
         public string Kegiatan { get; set; }
         [DataTables]
-       //public string Nama { get; set; }
+        //public string Nama { get; set; }
         public string Jenis { get; set; }
         [DataTables]
         public string PenanggungJawab { get; set; }

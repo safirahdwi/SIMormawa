@@ -35,7 +35,7 @@ namespace Ormawa.Controllers
             _combobox = combobox;
             _repo = repo;
         }
-      
+
         public IActionResult Index()
         {
             var dataProviderUrl = Url.Action("DataTables");
@@ -72,13 +72,14 @@ namespace Ormawa.Controllers
                          + "<a href='/Upload/Details/" + ID + "' class='btn btn-primary btn-sm btn-flat'>"
                            + "<span class='fa fa-calendar-o'></span>"
                          + "</a>"
-                         + "<a href='/Upload/Delete/" + ID + "' class='btn btn-danger btn-sm btn-flat' data-target=\"#myModal\" data-toggle=\"modal\">"
-                           + "<span class='fa fa-trash'></span>"
+                         + "<a onclick='Delete(" + ID + ")' class='btn btn-danger btn-sm btn-flat'>"
+                           + "<span class='fa fa-trash' style='color:white'></span>"
                          + "</a>"
                     + "</div>";
             return res;
         }
-        public IActionResult Upload() {
+        public IActionResult Upload()
+        {
             vmod.ListTipe = new SelectList(_combobox.TipeKegiatanOrmawa(), "ID", "Value");
             vmod.ListJenis = new SelectList(_combobox.JenisKegiatanOrmawa(), "ID", "Value");
             vmod.ListPj = new SelectList(_combobox.AnggotaOrmawa(), "ID", "Value");
@@ -102,20 +103,20 @@ namespace Ormawa.Controllers
                     vmod.Urldokumen = $"https://{await _fileService.UploadDokumen($"test_{dok}", vmod.FileDokumen)}";
 
                     _repo.Insert(vmod);
-                   
+
                     //return RedirectToAction(nameof(Daftaranggota));
                     SetSuccessNotification("Dokumen Berhasil di Upload");
                     return RedirectToAction("Index", "Upload");
                 }
                 return RedirectToAction("Index");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 SetErrorNotification(e.Message);
                 return RedirectToAction("Index", "Upload");
             }
         }
-      
+
         public IActionResult Details(int id)
         {
             var DetailUpload = _repo.GetDetail(id);
@@ -123,6 +124,18 @@ namespace Ormawa.Controllers
 
             return View(vmod);
         }
-
+        public void DeleteUpload(int Id)
+        {
+            try
+            {
+                _repo.DeleteUpload(Id);
+                SetSuccessNotification("Data removed successfully");
+            }
+            catch (Exception e)
+            {
+                var a = e.Message;
+                SetErrorNotification("Failed to remove data");
+            }
+        }
     }
 }

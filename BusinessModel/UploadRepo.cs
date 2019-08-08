@@ -27,6 +27,7 @@ namespace Ormawa.BusinessModel
                         select new UploadRow
                         {
                             Id = o.Id,
+                            IdDaftarPengajuan = b.Id,
                             Jenis = d.Nama,
                             //ang = e.Mahasiswa.Orang.Nama,
                             PenanggungJawab = f.Mahasiswa.Orang.Nama,
@@ -65,14 +66,14 @@ namespace Ormawa.BusinessModel
                             url = dok.Urldokumen,
                             NamaDokumen = dok.Nama,
                             Kegiatan = peng.Kegiatan,
-                            
+
 
                         };
 
             return query.FirstOrDefault();
 
         }
-        public void Insert (UploadViewModel vmod)
+        public void Insert(UploadViewModel vmod)
         {
             DokumenOrmawa dokumen = new DokumenOrmawa();
             dokumen.Nama = vmod.Nama;
@@ -95,5 +96,22 @@ namespace Ormawa.BusinessModel
             _context.DaftarDokumenOrmawa.Add(daftar);
             _context.SaveChanges();
         }
+
+        public void DeleteUpload (int Id)
+        {
+            var pengajuan = _context.PengajuanProposalKegiatan.Find(Id);
+            
+            var dftr = _context.DaftarDokumenOrmawa.Where(x => x.PengajuanProposalKegiatanId == Id);
+            foreach (var i in dftr)
+            {
+                var dokumen = _context.DokumenOrmawa.Find(i.DokumenOrmawaId);
+                _context.DokumenOrmawa.Remove(dokumen);
+            }
+
+            _context.DaftarDokumenOrmawa.RemoveRange(dftr);
+            _context.PengajuanProposalKegiatan.Remove(pengajuan);
+            _context.SaveChanges();
+        }
+    }
 }
-}
+

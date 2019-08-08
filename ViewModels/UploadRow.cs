@@ -10,6 +10,8 @@ namespace Ormawa.ViewModels
     {
         [DataTables(Visible =false)]
         public int Id { get; set; }
+        [DataTables(Visible = false)]
+        public int IdDaftarPengajuan { get; set; }
         [DataTables]
         public int No { get; set; }
         [DataTables]

@@ -53,3 +53,36 @@
         <!-- /.col -->
     </div>
 </section>
+
+    <partial name="_Delete" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnShowModal").click(function () {
+                $("#loginModal").modal('show');
+            });
+
+            $("#btnHideModal").click(function () {
+                $("#loginModal").modal('hide');
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+    function Delete(id) {
+        if (confirm('Are you sure want to delete this log activity?')) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("DeleteUpload", "Upload")',
+                data: { "ID": id },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    }
+    </script>
+

@@ -1,4 +1,4 @@
-﻿@model Ormawa.ViewModels.UploadViewModel
+﻿@model Ormawa.ViewModels.RkatViewModel
 
 @{
     ViewData["Title"] = "Tambah Laporan Kegiatan";
@@ -79,48 +79,48 @@
 <section class="content">
     <div class="row">
         <div class="col-md-4">
-                    <form role="form" enctype="multipart/form-data" method="post" asp-controller="Upload" asp-action="MultipleFiles">
-                        <div class="form-group">
-                            <label class="control-label">Nama Kegiatan</label>
-                            <input asp-for="Kegiatan" class="form-control" />
-                            <span asp-validation-for="Kegiatan" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="TipeKegiatanOrmawa"><b>Tipe Kegiatan</b></label>
-                            @Html.DropDownListFor(model => model.TipeKegiatanOrmawaId, Model.ListTipe, ".. Pilih Tipe ..", new { @class = "form-control select2 cari-tipe" })
-                        </div>
-                        <div class="form-group">
-                            <label for="JenisKegiatanOrmawa"><b>Jenis Kegiatan</b></label>
-                            @Html.DropDownListFor(model => model.JenisKegiatanOrmawaId, Model.ListJenis, ".. Pilih Jenis ..", new { @class = "form-control select2 cari-jenis" })
-                        </div>
-                        <div class="form-group">
-                            <label for="PenanggungJawabID"><b>Penanggung Jawab Acara</b></label>
-                            @Html.DropDownListFor(model => model.PenanggungJawabId, Model.ListPj, ".. Pilih Penanggung Jawab ..", new { @class = "form-control select2 cari-pj" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Dana Anggaran</label>
-                            <input asp-for="DanaAnggaran" class="form-control" />
-                            <span asp-validation-for="DanaAnggaran" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Nama Dokumen</label>
-                            <input asp-for="Nama" class="form-control" />
-                            <span asp-validation-for="Nama" class="text-danger"></span>
-                            <br />
-                            <input asp-for="FileDokumen" type="file" />
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
-                            </div>
-                        </div>
-                    </form>
+            <form role="form" enctype="multipart/form-data" method="post" asp-controller="Upload" asp-action="MultipleFiles">
+                <div class="form-group">
+                    <label class="control-label">Nama Kegiatan</label>
+                    <input asp-for="Kegiatan" class="form-control" />
+                    <span asp-validation-for="Kegiatan" class="text-danger"></span>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="TipeKegiatanOrmawa"><b>Tipe Kegiatan</b></label>
+                    @Html.DropDownListFor(model => model.TipeKegiatanOrmawaId, Model.ListTipe, ".. Pilih Tipe ..", new { @class = "form-control select2 cari-tipe" })
+                </div>
+                <div class="form-group">
+                    <label for="JenisKegiatanOrmawa"><b>Jenis Kegiatan</b></label>
+                    @Html.DropDownListFor(model => model.JenisKegiatanOrmawaId, Model.ListJenis, ".. Pilih Jenis ..", new { @class = "form-control select2 cari-jenis" })
+                </div>
+                <div class="form-group">
+                    <label for="PenanggungJawabID"><b>Penanggung Jawab Acara</b></label>
+                    @Html.DropDownListFor(model => model.PenanggungJawabId, Model.ListPj, ".. Pilih Penanggung Jawab ..", new { @class = "form-control select2 cari-pj" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dana Anggaran</label>
+                    <input asp-for="DanaAnggaran" class="form-control" />
+                    <span asp-validation-for="DanaAnggaran" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nama Dokumen</label>
+                    <input asp-for="Nama" class="form-control" />
+                    <span asp-validation-for="Nama" class="text-danger"></span>
+                    <br />
+                    <input asp-for="FileDokumen" type="file" />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 
 @*@section Scripts {

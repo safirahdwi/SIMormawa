@@ -10,6 +10,7 @@ namespace Ormawa.Models
             Mahasiswa = new HashSet<Mahasiswa>();
             PengajuanProposalKegiatanApprovedByNavigation = new HashSet<PengajuanProposalKegiatan>();
             PengajuanProposalKegiatanPenanggungJawab = new HashSet<PengajuanProposalKegiatan>();
+            Pengguna = new HashSet<Pengguna>();
         }
 
         public int Id { get; set; }
@@ -35,5 +36,6 @@ namespace Ormawa.Models
         public virtual ICollection<Mahasiswa> Mahasiswa { get; set; }
         public virtual ICollection<PengajuanProposalKegiatan> PengajuanProposalKegiatanApprovedByNavigation { get; set; }
         public virtual ICollection<PengajuanProposalKegiatan> PengajuanProposalKegiatanPenanggungJawab { get; set; }
+        public virtual ICollection<Pengguna> Pengguna { get; set; }
     }
 }

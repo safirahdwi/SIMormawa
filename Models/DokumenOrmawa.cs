@@ -15,6 +15,7 @@ namespace Ormawa.Models
         public string Urldokumen { get; set; }
         public int? JenisDokumenId { get; set; }
 
+        public virtual JenisDokumen JenisDokumen { get; set; }
         public virtual ICollection<DaftarDokumenOrmawa> DaftarDokumenOrmawa { get; set; }
     }
 }

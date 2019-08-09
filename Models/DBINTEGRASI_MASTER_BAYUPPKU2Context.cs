@@ -19,9 +19,12 @@ namespace Ormawa.Models
         public virtual DbSet<BiodataOrang> BiodataOrang { get; set; }
         public virtual DbSet<DaftarDokumenOrmawa> DaftarDokumenOrmawa { get; set; }
         public virtual DbSet<DokumenOrmawa> DokumenOrmawa { get; set; }
+        public virtual DbSet<HakAksesPengguna> HakAksesPengguna { get; set; }
         public virtual DbSet<JabatanOrmawa> JabatanOrmawa { get; set; }
+        public virtual DbSet<JenisDokumen> JenisDokumen { get; set; }
         public virtual DbSet<JenisKegiatanOrmawa> JenisKegiatanOrmawa { get; set; }
         public virtual DbSet<JenisOrganisasi> JenisOrganisasi { get; set; }
+        public virtual DbSet<JenisPengguna> JenisPengguna { get; set; }
         public virtual DbSet<JenisPrestasiOrmawa> JenisPrestasiOrmawa { get; set; }
         public virtual DbSet<KalenderKegiatanOrmawa> KalenderKegiatanOrmawa { get; set; }
         public virtual DbSet<KegiatanOrmawa> KegiatanOrmawa { get; set; }
@@ -34,6 +37,7 @@ namespace Ormawa.Models
         public virtual DbSet<Orang> Orang { get; set; }
         public virtual DbSet<OrganisasiOrmawa> OrganisasiOrmawa { get; set; }
         public virtual DbSet<PengajuanProposalKegiatan> PengajuanProposalKegiatan { get; set; }
+        public virtual DbSet<Pengguna> Pengguna { get; set; }
         public virtual DbSet<PrestasiOrmawa> PrestasiOrmawa { get; set; }
         public virtual DbSet<PublikasiOrmawa> PublikasiOrmawa { get; set; }
         public virtual DbSet<StatusPengajuan> StatusPengajuan { get; set; }
@@ -46,7 +50,7 @@ namespace Ormawa.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=172.17.0.136;Database=DBINTEGRASI_MASTER_BAYUPPKU2;uid=sys-ormawa;pwd=PKLormawa1p8;ConnectRetryCount=0;");
+                optionsBuilder.UseSqlServer("Server=172.17.0.136;Database=DBINTEGRASI_MASTER_BAYUPPKU2;uid=sys-ormawa;pwd=PKLormawa1p8;ConnectRetryCount=0");
             }
         }
 
@@ -147,6 +151,34 @@ namespace Ormawa.Models
                 entity.Property(e => e.Urldokumen)
                     .HasColumnName("URLDokumen")
                     .HasColumnType("text");
+
+                entity.HasOne(d => d.JenisDokumen)
+                    .WithMany(p => p.DokumenOrmawa)
+                    .HasForeignKey(d => d.JenisDokumenId)
+                    .HasConstraintName("FK_DokumenOrmawa_JenisDokumen");
+            });
+
+            modelBuilder.Entity<HakAksesPengguna>(entity =>
+            {
+                entity.ToTable("HakAksesPengguna", "IPBTrx");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.JenisPenggunaId).HasColumnName("JenisPenggunaID");
+
+                entity.Property(e => e.PenggunaId).HasColumnName("PenggunaID");
+
+                entity.Property(e => e.StrukturOrganisasiId).HasColumnName("StrukturOrganisasiID");
+
+                entity.HasOne(d => d.JenisPengguna)
+                    .WithMany(p => p.HakAksesPengguna)
+                    .HasForeignKey(d => d.JenisPenggunaId)
+                    .HasConstraintName("FK_HakAksesPengguna_JenisPengguna");
+
+                entity.HasOne(d => d.Pengguna)
+                    .WithMany(p => p.HakAksesPengguna)
+                    .HasForeignKey(d => d.PenggunaId)
+                    .HasConstraintName("FK_HakAksesPengguna_Pengguna");
             });
 
             modelBuilder.Entity<JabatanOrmawa>(entity =>
@@ -154,6 +186,19 @@ namespace Ormawa.Models
                 entity.ToTable("JabatanOrmawa", "OrmRef");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Nama)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<JenisDokumen>(entity =>
+            {
+                entity.ToTable("JenisDokumen", "OrmRef");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Keterangan).HasColumnType("text");
 
                 entity.Property(e => e.Nama)
                     .HasMaxLength(50)
@@ -176,6 +221,19 @@ namespace Ormawa.Models
                 entity.ToTable("JenisOrganisasi", "OrmRef");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Nama)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<JenisPengguna>(entity =>
+            {
+                entity.ToTable("JenisPengguna", "IPBRef");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.JenisSistemId).HasColumnName("JenisSistemID");
 
                 entity.Property(e => e.Nama)
                     .HasMaxLength(50)
@@ -623,6 +681,28 @@ namespace Ormawa.Models
                     .WithMany(p => p.PengajuanProposalKegiatan)
                     .HasForeignKey(d => d.TipeKegiatanOrmawaId)
                     .HasConstraintName("FK_PengajuanProposalKegiatan_TipeKegiatanOrmawa");
+            });
+
+            modelBuilder.Entity<Pengguna>(entity =>
+            {
+                entity.ToTable("Pengguna", "IPBMst");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.IsBlokir).HasColumnName("isBlokir");
+
+                entity.Property(e => e.OrangId).HasColumnName("OrangID");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WaktuDibuat).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Orang)
+                    .WithMany(p => p.Pengguna)
+                    .HasForeignKey(d => d.OrangId)
+                    .HasConstraintName("FK_Pengguna_Orang");
             });
 
             modelBuilder.Entity<PrestasiOrmawa>(entity =>

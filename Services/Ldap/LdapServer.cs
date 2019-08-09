@@ -36,15 +36,15 @@ namespace IPB.Ldap
                     ldap.Connect(this.HostName, this.Port);
                     ldap.Bind(null, null); // anonymous bind
                 }
-                catch (LdapException)
+                catch (LdapException e)
                 {
                     throw new Exception("Error connecting to LDAP server");
                 }
 
                 var entry = GetEntry(ldap, userName);
-                //#if DEBUG
-                //                return LdapUser.FromEntry(entry);
-                //#endif
+//#if DEBUG
+//                return LdapUser.FromEntry(entry);
+//#endif
                 var dn = entry.DN;
                 try
                 {

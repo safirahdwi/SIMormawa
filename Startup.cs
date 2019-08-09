@@ -48,6 +48,7 @@ namespace Ormawa
             services.AddDbContext<DBINTEGRASI_MASTER_BAYUPPKU2Context>(options => options.UseSqlServer(connectionString["DefaultConnection"]).UseLoggerFactory(DbLoggerFactory));
 
             services.AddTransient<Combobox>();
+            services.AddTransient<AccountModel>();
             services.AddTransient<UploadRepo>();
             services.AddTransient<OrganisasiOrmawaRepo>();
             services.AddTransient<DaftarAnggotaRepo>();

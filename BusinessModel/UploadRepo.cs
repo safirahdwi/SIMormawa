@@ -38,8 +38,7 @@ namespace Ormawa.BusinessModel
                             //NamaDokumen = c.Nama,
                             Kegiatan = o.Kegiatan,
                             //AnggotaOrmawa = e.Mahasiswa.Orang.Nama,
-
-
+                            IdDaftarPengajuan = b.Id,
                         };
             return query;
 
@@ -116,6 +115,22 @@ namespace Ormawa.BusinessModel
             pengajuan.JenisKegiatanOrmawaId = vmod.JenisKegiatanOrmawaId;
             pengajuan.PenanggungJawabId = 7;
             _context.Entry(pengajuan).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteUpload(int Id)
+        {
+            var pengajuan = _context.PengajuanProposalKegiatan.Find(Id);
+
+            var dftr = _context.DaftarDokumenOrmawa.Where(x => x.PengajuanProposalKegiatanId == Id);
+            foreach (var i in dftr)
+            {
+                var dokumen = _context.DokumenOrmawa.Find(i.DokumenOrmawaId);
+                _context.DokumenOrmawa.Remove(dokumen);
+            }
+
+            _context.DaftarDokumenOrmawa.RemoveRange(dftr);
+            _context.PengajuanProposalKegiatan.Remove(pengajuan);
             _context.SaveChanges();
         }
     }

@@ -36,6 +36,19 @@ namespace Ormawa.BusinessModel
                         };
             return query;
         }
+        public DaftarAnggotaOrmawaViewModel GetNamaOrganisasi(int id)
+        {
+            var himpunan = from m in _context.AnggotaOrmawa
+                           join p in _context.OrganisasiOrmawa on m.OrganisasiOrmawaId equals p.Id
+                           where m.OrganisasiOrmawaId == id
+                           select new DaftarAnggotaOrmawaViewModel()
+                           {
+                               Id = m.Id,
+                               //Mahasiswa = m.Nama,
+                               OrganisasiOrmawa = p.Nama
+                           };
+            return himpunan.FirstOrDefault();
+        }
         public DaftarAnggotaOrmawaViewModel GetDetailAnggota(int Id)
         {
             var anggota = from m in _context.AnggotaOrmawa
@@ -45,7 +58,7 @@ namespace Ormawa.BusinessModel
                           join struk in _context.StrukturalOrmawa on m.Id equals struk.AnggotaOrmawaId
                           where m.Id == Id
                           select new DaftarAnggotaOrmawaViewModel
-                       {
+                          {
                               Id = m.Id,
                               MahasiswaId = o.Id,
                               Mahasiswa = p.Nama,
@@ -89,7 +102,7 @@ namespace Ormawa.BusinessModel
             ormawa.StatusAnggota = vmod.StatusAnggota;
             _context.Entry(ormawa).State = EntityState.Modified;
 
-            StrukturalOrmawa struktur = _context.StrukturalOrmawa.Find(vmod.StrukturOrmawaId);            
+            StrukturalOrmawa struktur = _context.StrukturalOrmawa.Find(vmod.StrukturOrmawaId);
             struktur.OrganisasiOrmawaId = vmod.OrganisasiOrmawaId;
             struktur.JabatanOrmawaId = vmod.JabatanOrmawaId;
             struktur.Tmt = vmod.Tmt;

@@ -12,5 +12,6 @@ namespace Ormawa.Models
 
         public virtual JenisPengguna JenisPengguna { get; set; }
         public virtual Pengguna Pengguna { get; set; }
+        public virtual StrukturOrganisasi StrukturOrganisasi { get; set; }
     }
 }

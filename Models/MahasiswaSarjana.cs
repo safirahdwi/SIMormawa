@@ -21,5 +21,7 @@ namespace Ormawa.Models
         public int? TahunSemesterMasukId { get; set; }
 
         public virtual Mahasiswa Mahasiswa { get; set; }
+        public virtual Mayor Mayor { get; set; }
+        public virtual MahasiswaEkstensi MahasiswaEkstensi { get; set; }
     }
 }

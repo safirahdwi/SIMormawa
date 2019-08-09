@@ -18,11 +18,13 @@ namespace Ormawa.Models
         public virtual DbSet<AnggotaOrmawa> AnggotaOrmawa { get; set; }
         public virtual DbSet<BiodataOrang> BiodataOrang { get; set; }
         public virtual DbSet<DaftarDokumenOrmawa> DaftarDokumenOrmawa { get; set; }
+        public virtual DbSet<Departemen> Departemen { get; set; }
         public virtual DbSet<DokumenOrmawa> DokumenOrmawa { get; set; }
         public virtual DbSet<HakAksesPengguna> HakAksesPengguna { get; set; }
         public virtual DbSet<JabatanOrmawa> JabatanOrmawa { get; set; }
         public virtual DbSet<JenisDokumen> JenisDokumen { get; set; }
         public virtual DbSet<JenisKegiatanOrmawa> JenisKegiatanOrmawa { get; set; }
+        public virtual DbSet<JenisKelamin> JenisKelamin { get; set; }
         public virtual DbSet<JenisOrganisasi> JenisOrganisasi { get; set; }
         public virtual DbSet<JenisPengguna> JenisPengguna { get; set; }
         public virtual DbSet<JenisPrestasiOrmawa> JenisPrestasiOrmawa { get; set; }
@@ -31,16 +33,22 @@ namespace Ormawa.Models
         public virtual DbSet<Mahasiswa> Mahasiswa { get; set; }
         public virtual DbSet<MahasiswaDiploma> MahasiswaDiploma { get; set; }
         public virtual DbSet<MahasiswaDoktor> MahasiswaDoktor { get; set; }
+        public virtual DbSet<MahasiswaEkstensi> MahasiswaEkstensi { get; set; }
         public virtual DbSet<MahasiswaMagister> MahasiswaMagister { get; set; }
+        public virtual DbSet<MahasiswaProfesi> MahasiswaProfesi { get; set; }
         public virtual DbSet<MahasiswaSarjana> MahasiswaSarjana { get; set; }
+        public virtual DbSet<Mayor> Mayor { get; set; }
         public virtual DbSet<MediaPublikasiOrmawa> MediaPublikasiOrmawa { get; set; }
+        public virtual DbSet<MutasiPegawai> MutasiPegawai { get; set; }
         public virtual DbSet<Orang> Orang { get; set; }
         public virtual DbSet<OrganisasiOrmawa> OrganisasiOrmawa { get; set; }
         public virtual DbSet<PengajuanProposalKegiatan> PengajuanProposalKegiatan { get; set; }
         public virtual DbSet<Pengguna> Pengguna { get; set; }
         public virtual DbSet<PrestasiOrmawa> PrestasiOrmawa { get; set; }
+        public virtual DbSet<ProgramKeahlian> ProgramKeahlian { get; set; }
         public virtual DbSet<PublikasiOrmawa> PublikasiOrmawa { get; set; }
         public virtual DbSet<StatusPengajuan> StatusPengajuan { get; set; }
+        public virtual DbSet<StrukturOrganisasi> StrukturOrganisasi { get; set; }
         public virtual DbSet<StrukturalOrmawa> StrukturalOrmawa { get; set; }
         public virtual DbSet<TahapanPengajuan> TahapanPengajuan { get; set; }
         public virtual DbSet<TipeKegiatanOrmawa> TipeKegiatanOrmawa { get; set; }
@@ -136,6 +144,37 @@ namespace Ormawa.Models
                     .HasConstraintName("FK_DaftarDokumenOrmawa_PengajuanProposalKegiatan");
             });
 
+            modelBuilder.Entity<Departemen>(entity =>
+            {
+                entity.ToTable("Departemen", "IPBMst");
+
+                entity.HasIndex(e => e.Kode)
+                    .HasName("IX_refDepartemen");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DepartemenBkey)
+                    .HasColumnName("DepartemenBKey")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.FakultasId).HasColumnName("FakultasID");
+
+                entity.Property(e => e.Kode)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TanggalDibentuk).HasColumnType("date");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.Departemen)
+                    .HasForeignKey<Departemen>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Departemen_StrukturOrganisasi");
+            });
+
             modelBuilder.Entity<DokumenOrmawa>(entity =>
             {
                 entity.ToTable("DokumenOrmawa", "OrmRef");
@@ -179,6 +218,11 @@ namespace Ormawa.Models
                     .WithMany(p => p.HakAksesPengguna)
                     .HasForeignKey(d => d.PenggunaId)
                     .HasConstraintName("FK_HakAksesPengguna_Pengguna");
+
+                entity.HasOne(d => d.StrukturOrganisasi)
+                    .WithMany(p => p.HakAksesPengguna)
+                    .HasForeignKey(d => d.StrukturOrganisasiId)
+                    .HasConstraintName("FK_HakAksesPengguna_StrukturOrganisasi");
             });
 
             modelBuilder.Entity<JabatanOrmawa>(entity =>
@@ -208,6 +252,17 @@ namespace Ormawa.Models
             modelBuilder.Entity<JenisKegiatanOrmawa>(entity =>
             {
                 entity.ToTable("JenisKegiatanOrmawa", "OrmRef");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Nama)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<JenisKelamin>(entity =>
+            {
+                entity.ToTable("JenisKelamin", "IPBRef");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -364,6 +419,11 @@ namespace Ormawa.Models
                     .HasForeignKey<MahasiswaDiploma>(d => d.MahasiswaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MahasiswaDiploma_Mahasiswa");
+
+                entity.HasOne(d => d.ProgramKeahlian)
+                    .WithMany(p => p.MahasiswaDiploma)
+                    .HasForeignKey(d => d.ProgramKeahlianId)
+                    .HasConstraintName("FK_MahasiswaDiploma_ProgramKeahlian");
             });
 
             modelBuilder.Entity<MahasiswaDoktor>(entity =>
@@ -414,6 +474,44 @@ namespace Ormawa.Models
                     .WithOne(p => p.MahasiswaDoktor)
                     .HasForeignKey<MahasiswaDoktor>(d => d.MahasiswaId)
                     .HasConstraintName("FK_MahasiswaDoktor_Mahasiswa");
+
+                entity.HasOne(d => d.Mayor)
+                    .WithMany(p => p.MahasiswaDoktor)
+                    .HasForeignKey(d => d.MayorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MahasiswaDoktor_Mayor");
+            });
+
+            modelBuilder.Entity<MahasiswaEkstensi>(entity =>
+            {
+                entity.HasKey(e => e.MahasiswaSarjanaId)
+                    .HasName("PK__Mahasisw__896F7314E61DA4A5");
+
+                entity.ToTable("MahasiswaEkstensi", "AkdMst");
+
+                entity.Property(e => e.MahasiswaSarjanaId)
+                    .HasColumnName("MahasiswaSarjanaID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.AsalPerguruanTinggiId).HasColumnName("AsalPerguruanTinggiID");
+
+                entity.Property(e => e.FakultasAsal)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ipksebelumnya).HasColumnName("IPKSebelumnya");
+
+                entity.Property(e => e.ProgramStudiAsal)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sksdiakui).HasColumnName("SKSDiakui");
+
+                entity.HasOne(d => d.MahasiswaSarjana)
+                    .WithOne(p => p.MahasiswaEkstensi)
+                    .HasForeignKey<MahasiswaEkstensi>(d => d.MahasiswaSarjanaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MahasiswaSarjana_MahasiswaEkstensi");
             });
 
             modelBuilder.Entity<MahasiswaMagister>(entity =>
@@ -465,6 +563,51 @@ namespace Ormawa.Models
                     .HasForeignKey<MahasiswaMagister>(d => d.MahasiswaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MahasiswaMagister_Mahasiswa");
+
+                entity.HasOne(d => d.Mayor)
+                    .WithMany(p => p.MahasiswaMagister)
+                    .HasForeignKey(d => d.MayorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MahasiswaMagister_Mayor");
+            });
+
+            modelBuilder.Entity<MahasiswaProfesi>(entity =>
+            {
+                entity.HasKey(e => e.MahasiswaId);
+
+                entity.ToTable("MahasiswaProfesi", "AkdMst");
+
+                entity.Property(e => e.MahasiswaId)
+                    .HasColumnName("MahasiswaID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.JalurMasukId).HasColumnName("JalurMasukID");
+
+                entity.Property(e => e.MayorId).HasColumnName("MayorID");
+
+                entity.Property(e => e.Nim)
+                    .HasColumnName("NIM")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StatusAkademikId).HasColumnName("StatusAkademikID");
+
+                entity.Property(e => e.TahunAkademikId).HasColumnName("TahunAkademikID");
+
+                entity.Property(e => e.TahunSemesterMasukId).HasColumnName("TahunSemesterMasukID");
+
+                entity.Property(e => e.TanggalMasuk).HasColumnType("date");
+
+                entity.HasOne(d => d.Mahasiswa)
+                    .WithOne(p => p.MahasiswaProfesi)
+                    .HasForeignKey<MahasiswaProfesi>(d => d.MahasiswaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MahasiswaProfesi_Mahasiswa");
+
+                entity.HasOne(d => d.Mayor)
+                    .WithMany(p => p.MahasiswaProfesi)
+                    .HasForeignKey(d => d.MayorId)
+                    .HasConstraintName("FK_MahasiswaProfesi_Mayor");
             });
 
             modelBuilder.Entity<MahasiswaSarjana>(entity =>
@@ -510,6 +653,71 @@ namespace Ormawa.Models
                     .HasForeignKey<MahasiswaSarjana>(d => d.MahasiswaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MahasiswaSarjana_Mahasiswa");
+
+                entity.HasOne(d => d.Mayor)
+                    .WithMany(p => p.MahasiswaSarjana)
+                    .HasForeignKey(d => d.MayorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MahasiswaSarjana_Mayor");
+            });
+
+            modelBuilder.Entity<Mayor>(entity =>
+            {
+                entity.ToTable("Mayor", "AkdMst");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.DepartemenId).HasColumnName("DepartemenID");
+
+                entity.Property(e => e.Inisial)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Kode).HasMaxLength(10);
+
+                entity.Property(e => e.KodePdpt)
+                    .HasColumnName("KodePDPT")
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MayorPascasarjanaBkey)
+                    .HasColumnName("MayorPascasarjanaBKey")
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.MayorSarjanaBkey)
+                    .HasColumnName("MayorSarjanaBKey")
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.Nama)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.NamaEn).HasMaxLength(255);
+
+                entity.Property(e => e.NomorSkdibentuk)
+                    .HasColumnName("NomorSKDibentuk")
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.NomorSkditutup)
+                    .HasColumnName("NomorSKDitutup")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RumpunIlmuProgramStudiId).HasColumnName("RumpunIlmuProgramStudiID");
+
+                entity.Property(e => e.StrataId).HasColumnName("StrataID");
+
+                entity.Property(e => e.StrukturOrganisasiId).HasColumnName("StrukturOrganisasiID");
+
+                entity.Property(e => e.TanggalDibentuk).HasColumnType("date");
+
+                entity.Property(e => e.TanggalDitutup).HasColumnType("date");
+
+                entity.HasOne(d => d.Departemen)
+                    .WithMany(p => p.Mayor)
+                    .HasForeignKey(d => d.DepartemenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Mayor_Departemen");
             });
 
             modelBuilder.Entity<MediaPublikasiOrmawa>(entity =>
@@ -528,6 +736,39 @@ namespace Ormawa.Models
                     .WithMany(p => p.MediaPublikasiOrmawa)
                     .HasForeignKey(d => d.PublikasiOrmawaId)
                     .HasConstraintName("FK_MediaPublikasiOrmawa_PublikasiOrmawa");
+            });
+
+            modelBuilder.Entity<MutasiPegawai>(entity =>
+            {
+                entity.ToTable("MutasiPegawai", "PegHis");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.MutasiPegawaiBkey)
+                    .HasColumnName("MutasiPegawaiBKey")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.NomorSk)
+                    .IsRequired()
+                    .HasColumnName("NomorSK")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PegawaiId).HasColumnName("PegawaiID");
+
+                entity.Property(e => e.StrukturOrganisasiId).HasColumnName("StrukturOrganisasiID");
+
+                entity.Property(e => e.TanggalEntri).HasColumnType("datetime");
+
+                entity.Property(e => e.Tmt)
+                    .HasColumnName("TMT")
+                    .HasColumnType("date");
+
+                entity.HasOne(d => d.StrukturOrganisasi)
+                    .WithMany(p => p.MutasiPegawai)
+                    .HasForeignKey(d => d.StrukturOrganisasiId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MutasiPegawai_StrukturOrganisasi");
             });
 
             modelBuilder.Entity<Orang>(entity =>
@@ -602,6 +843,11 @@ namespace Ormawa.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.TempatLahirId).HasColumnName("TempatLahirID");
+
+                entity.HasOne(d => d.JenisKelamin)
+                    .WithMany(p => p.Orang)
+                    .HasForeignKey(d => d.JenisKelaminId)
+                    .HasConstraintName("FK_Orang_JenisKelamin");
             });
 
             modelBuilder.Entity<OrganisasiOrmawa>(entity =>
@@ -741,6 +987,83 @@ namespace Ormawa.Models
                     .HasConstraintName("FK_PrestasiOrmawa_OrganisasiOrmawa");
             });
 
+            modelBuilder.Entity<ProgramKeahlian>(entity =>
+            {
+                entity.ToTable("ProgramKeahlian", "AkdMst");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Akreditasi)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Alamat)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DirektoratId).HasColumnName("DirektoratID");
+
+                entity.Property(e => e.Inisial)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsPdd).HasColumnName("IsPDD");
+
+                entity.Property(e => e.Kode).HasMaxLength(10);
+
+                entity.Property(e => e.KodePdpt)
+                    .HasColumnName("KodePDPT")
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KonfirmasiBanpt)
+                    .HasColumnName("KonfirmasiBANPT")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KotaKabupatenId).HasColumnName("KotaKabupatenID");
+
+                entity.Property(e => e.Nama)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.NamaEn).HasMaxLength(255);
+
+                entity.Property(e => e.NoSkBan)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NoSkDikti)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProgramKeahlianBkey)
+                    .HasColumnName("ProgramKeahlianBKey")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.StatusAkredikasi)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StatusProgramStudi)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StrukturOrganisasiId).HasColumnName("StrukturOrganisasiID");
+
+                entity.Property(e => e.TanggalAkhirSkBan).HasColumnType("datetime");
+
+                entity.Property(e => e.TanggalAkhirSkDikti).HasColumnType("datetime");
+
+                entity.Property(e => e.TanggalDibentuk).HasColumnType("date");
+
+                entity.Property(e => e.TanggalSkBan).HasColumnType("datetime");
+
+                entity.Property(e => e.TanggalSkdikti)
+                    .HasColumnName("TanggalSKDikti")
+                    .HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<PublikasiOrmawa>(entity =>
             {
                 entity.ToTable("PublikasiOrmawa", "OrmMst");
@@ -770,6 +1093,57 @@ namespace Ormawa.Models
                 entity.Property(e => e.Nama)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<StrukturOrganisasi>(entity =>
+            {
+                entity.ToTable("StrukturOrganisasi", "IPBMst");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Inisial)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KelompokOrganisasiId).HasColumnName("KelompokOrganisasiID");
+
+                entity.Property(e => e.KelompokStrukturId).HasColumnName("KelompokStrukturID");
+
+                entity.Property(e => e.KodeGl)
+                    .HasColumnName("KodeGL")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nama)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NamaEn)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NamaJabatan)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NomorSk)
+                    .HasColumnName("NomorSK")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SkkeputusanId).HasColumnName("SKKeputusanID");
+
+                entity.Property(e => e.Sobkey)
+                    .HasColumnName("SOBKey")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.StrukturOrganisasiId).HasColumnName("StrukturOrganisasiID");
+
+                entity.HasOne(d => d.StrukturOrganisasiNavigation)
+                    .WithMany(p => p.InverseStrukturOrganisasiNavigation)
+                    .HasForeignKey(d => d.StrukturOrganisasiId)
+                    .HasConstraintName("FK_StrukturOrganisasi_selfStrukturOrganisasi");
             });
 
             modelBuilder.Entity<StrukturalOrmawa>(entity =>

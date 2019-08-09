@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Ormawa.Models;
 using Ormawa.Services;
 using Ormawa.BusinessModel;
+using IPB.Ldap;
 
 namespace Ormawa
 {
@@ -39,10 +40,15 @@ namespace Ormawa
             services.AddMvc();
             services.AddMvcJQueryDataTables();
 
+            var ldapSettings = Configuration.GetSection("Ldap");
+            services.AddTransient<ILdapServer>(s => new LdapServer(ldapSettings["Host"], int.Parse(ldapSettings["Port"]), ldapSettings["BaseDn"], ldapSettings["Filter"]));
+
+
             var connectionString = Configuration.GetSection("ConnectionStrings");
             services.AddDbContext<DBINTEGRASI_MASTER_BAYUPPKU2Context>(options => options.UseSqlServer(connectionString["DefaultConnection"]).UseLoggerFactory(DbLoggerFactory));
 
             services.AddTransient<Combobox>();
+            services.AddTransient<AccountModel>();
             services.AddTransient<UploadRepo>();
             services.AddTransient<OrganisasiOrmawaRepo>();
             services.AddTransient<DaftarAnggotaRepo>();

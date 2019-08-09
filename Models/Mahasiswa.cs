@@ -20,6 +20,7 @@ namespace Ormawa.Models
         public virtual MahasiswaDiploma MahasiswaDiploma { get; set; }
         public virtual MahasiswaDoktor MahasiswaDoktor { get; set; }
         public virtual MahasiswaMagister MahasiswaMagister { get; set; }
+        public virtual MahasiswaProfesi MahasiswaProfesi { get; set; }
         public virtual MahasiswaSarjana MahasiswaSarjana { get; set; }
         public virtual ICollection<AnggotaOrmawa> AnggotaOrmawa { get; set; }
         public virtual ICollection<PrestasiOrmawa> PrestasiOrmawa { get; set; }

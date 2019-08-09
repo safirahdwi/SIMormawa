@@ -32,6 +32,7 @@ namespace Ormawa.Models
         public string Nimppdhkey { get; set; }
         public int? OrangTamuKey { get; set; }
 
+        public virtual JenisKelamin JenisKelamin { get; set; }
         public virtual BiodataOrang BiodataOrang { get; set; }
         public virtual ICollection<Mahasiswa> Mahasiswa { get; set; }
         public virtual ICollection<PengajuanProposalKegiatan> PengajuanProposalKegiatanApprovedByNavigation { get; set; }

@@ -23,5 +23,6 @@ namespace Ormawa.Models
         public int? TahunSemesterMasukId { get; set; }
 
         public virtual Mahasiswa Mahasiswa { get; set; }
+        public virtual ProgramKeahlian ProgramKeahlian { get; set; }
     }
 }

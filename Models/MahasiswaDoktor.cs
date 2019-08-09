@@ -25,5 +25,6 @@ namespace Ormawa.Models
         public string Sponsor { get; set; }
 
         public virtual Mahasiswa Mahasiswa { get; set; }
+        public virtual Mayor Mayor { get; set; }
     }
 }

@@ -52,6 +52,8 @@ namespace Ormawa.Models
         public virtual DbSet<StrukturalOrmawa> StrukturalOrmawa { get; set; }
         public virtual DbSet<TahapanPengajuan> TahapanPengajuan { get; set; }
         public virtual DbSet<TipeKegiatanOrmawa> TipeKegiatanOrmawa { get; set; }
+        public virtual DbSet<Akd_DaftarMahasiswaMultiStrata> Akd_DaftarMahasiswaMultiStratas { get; set; }
+        public virtual DbSet<PegawaiViewMutasiPegawai> PegawaiViewMutasiPegawai { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -1214,6 +1216,36 @@ namespace Ormawa.Models
                 entity.Property(e => e.Nama)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+            modelBuilder.Entity<Akd_DaftarMahasiswaMultiStrata>(entity =>
+            {
+                entity.ToTable("Akd_DaftarMahasiswaMultiStrata", "dbo");
+
+                entity.Property(e => e.OrangID).HasColumnName("OrangID");
+                entity.Property(e => e.MahasiswaID).HasColumnName("MahasiswaID");
+                entity.Property(e => e.Nama).HasColumnName("Nama");
+                entity.Property(e => e.JenisKelamin).HasColumnName("JenisKelamin");
+                entity.Property(e => e.NIM).HasColumnName("NIM");
+                entity.Property(e => e.StrataID).HasColumnName("StrataID");
+                entity.Property(e => e.Strata).HasColumnName("Strata");
+                entity.Property(e => e.TanggalMasuk).HasColumnName("TanggalMasuk");
+                entity.Property(e => e.Prodi).HasColumnName("Prodi");
+                entity.Property(e => e.DepartemenID).HasColumnName("DepartemenID");
+                entity.Property(e => e.FakultasID).HasColumnName("FakultasID");
+                entity.Property(e => e.Departemen).HasColumnName("Departemen");
+                entity.Property(e => e.Fakultas).HasColumnName("Fakultas");
+                entity.Property(e => e.StatusAkademik).HasColumnName("StatusAkademik");
+            });
+            modelBuilder.Entity<PegawaiViewMutasiPegawai>(entity =>
+            {
+                entity.ToTable("PegawaiViewMutasiPegawai", "dbo");
+
+                entity.Property(e => e.ID).HasColumnName("ID");
+                entity.Property(e => e.pegawaiid).HasColumnName("pegawaiid");
+                entity.Property(e => e.strukturorganisasiid).HasColumnName("strukturorganisasiid");
+                entity.Property(e => e.TMT).HasColumnName("TMT");
+                entity.Property(e => e.Tanggalentri).HasColumnName("Tanggalentri");
+                entity.Property(e => e.rn).HasColumnName("rn");
             });
         }
     }
